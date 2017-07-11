@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'compressor',
+    'catalog',
+    'registration',
+
 ]
 
 MIDDLEWARE = [
@@ -118,3 +122,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT=os.path.join(BASE_DIR, 'static/')
+COMPRESS_ENABLED=True
+STATICFILES_FINDERS=(
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+
+#Registration settings:
+ACCOUNT_ACTIVATION_DAYS=5
+REGISTRATION_AUTO_LOGIN=True
+LOGIN_REDIRECT_URL="/"
+
+
+#Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='heyliseligenc@gmail.com'
+EMAIL_HOST_PASSWORD='liseliaydavebogi'
+EMAIL_PORT=587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'HeyLiseli@genc.com'

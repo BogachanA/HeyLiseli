@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+
+    <title>{% block title %}Hey Liseli, Hoşgeldin{% endblock %}</title>
+
+</head>
+<body>
+{% block body %}
+    Nabersin
+    <span>
+        {% if request.user.is_authenticated %}
+            {% if request.user.first_name %}
+                {{ request.user.first_name }}
+            {% else %}
+                {{request.user.username}}
+            {% endif %}!
+        {% else %}
+            gizemli eleman! Would you like to <a href="{% url 'auth_login' %}">Log In ?</a>
+        {% endif %}
+    </span>
+{% endblock %}
+</body>
+</html>

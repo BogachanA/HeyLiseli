@@ -1,0 +1,9 @@
+Greetings user,
+
+You've just signed up for an account at {{site.name}}. Please click the link below to activate your account and finalise the registry
+
+http://{{site.domain}}{% url 'registration_activate' activation_key %}
+
+This link is  valid for {{expiration_days}}. If it wasn't you that signed up for this account, you can safely ignore this e-mail.
+
+-The Mystery Books team.
