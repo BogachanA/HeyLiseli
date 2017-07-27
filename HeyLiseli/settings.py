@@ -131,6 +131,10 @@ STATICFILES_FINDERS=(
 )
 
 
+#Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL="/media/"
+
 #Registration settings:
 ACCOUNT_ACTIVATION_DAYS=5
 REGISTRATION_AUTO_LOGIN=True

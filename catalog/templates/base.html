@@ -1,25 +1,335 @@
-<!DOCTYPE html>
+
+{% load staticfiles %}
+
+{% load compress %}
+
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-
-    <title>{% block title %}Hey Liseli, Hoşgeldin{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/34c9fa160a.js"></script>
+    {% compress css %}
+       <link rel="stylesheet" href="{% static 'base/css/base_css.css' %}">
+    {%endcompress %}
+    <title>{% block title %}Hoşgeldin Liseli{% endblock %}</title>
 
 </head>
 <body>
-{% block body %}
-    Nabersin
-    <span>
-        {% if request.user.is_authenticated %}
-            {% if request.user.first_name %}
-                {{ request.user.first_name }}
-            {% else %}
-                {{request.user.username}}
-            {% endif %}!
-        {% else %}
-            gizemli eleman! Would you like to <a href="{% url 'auth_login' %}">Log In ?</a>
-        {% endif %}
-    </span>
-{% endblock %}
+
+    <nav class="navbar navbar-toggleable-sm fixed-top navbar-light" id="navigate">
+
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#NavDropdown" aria-controls="NavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="col-2  hidden-md-up" id="logoOnSmallDiv" style="width:200px;height:80px;margin-top:-15px;margin-left:-25px;">
+        <a class="navbar-brand" href="#" id="logoOnSmall" > <img src="{% static 'base/img/heyliseli_logo2.png' %}" style="width:200px;height:120px;"></a>
+        </div>
+
+      <div class="collapse navbar-collapse" id="NavDropdown">
+          <div class="container container-fluid">
+            <div class="row justify-content-sm-center align-items-center" style="height:60px;" id="links">
+                <hr class="hidden-md-up">
+                <div class="col-md-2 textLinks h-100" id="intsLink">
+                    <a href="#" id="toInts">Tecrübe Edin</a>
+                </div>
+                <hr>
+                <div class="col-md-2 textLinks h-100" id="volsLink">
+                    <a href="#" id="toVol">Katkıda Bulun</a>
+                </div>
+                <div class="col-md-4 hidden-sm-down" id="toHome">
+                    <a href="#" ><img src="{% static 'base/img/heyliseli_logo.png' %}" id="navbarLogo"></a>
+                </div>
+                <div class="col-md-2 textLinks h-100" id="meetLink">
+                    <a href="#" id="toMeet">Etkileşime Geç</a>
+                </div>
+                <div class="col-md-2 textLinks h-100" id="profileLink">
+                    <a href="{% url 'auth_login' %}" id="toUser">
+                        {% if request.user.is_authenticated %}
+                            <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+                            {% if request.user.first_name %}
+                                {{ request.user.first_name }}
+                            {% else %}
+                                {{request.user.username}}
+                            {% endif %}
+                        {% else %}
+                            Kullanıcı Girişi
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+          </div>
+      </div>
+    </nav>
+
+    {% block body %}
+
+    <div class="jumbotron jumbotron-fluid text-md-center" id="jumbo">
+        <div class="container container-fluid" id="jumboText">
+            <div class="row">
+                <div class="col-md-7 offset-5" id="merhaba">
+                    <h1>Merhaba Liseli, <br>Doğru Yere Geldin...</h1>
+                    <p class="text-secondary" style="font-size:20px; color: var(--aluminum);">Hayatın boyunca sana hep bir sürü fırsata sahip olduğunu söyleyip durdular. Fakat fark etmişsindir ki, bu fırsatlara erişmek o kadar kolay değil herkes için.</p>
+                    <button class="btn" type="button" id="regi">Şimdi Kaydol!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="container" id=" infoPanel">
+        <div class="row">
+            <div class="col-xs-9 offset-1" id="about">
+                <h1>Artık Mümkün!</h1>
+                <p class="text-muted">Senin kendini geliştirmeye ne kadar önem verdiğini, ve bu yolda çektiğin sıkıntıları biliyoruz.</p>
+                <p class="text-muted">Şimdi HeyLiseli platformu sayesinde bunu çok daha kolayca yapabileceksin!
+                Erişebileceğin tüm fırsatları ayağına getiriyoruz:</p>
+                <br>
+                <div class="row justify-content-sm-center" id="3info">
+
+                    <div class="col-md-3 infobox" id="intBox">
+                        <div class="panelFrontView" id="intFront">
+                            <img src="{% static 'base/img/landingPage/suitcase.png' %}">
+                            <h5 class="panelHeadline">Staj İmkanları</h5>
+                        </div>
+                        <div class="panelHead" id="intTitle">
+                            <p>Staj İmkanları</p>
+                        </div>
+                        <div class="panelBody" id="intBody">
+                            <p class="text-center">Artık iş tecrübesi edinmek çok kolay. Senin için topladığımız onlarca teklif arasından sadece seçim yapman yeterli!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 infobox" id="volBox">
+                        <div class="panelFrontView" id="volFront">
+                            <img src="{% static 'base/img/landingPage/volunteer.png' %}" id="volHands">
+                            <h5 class="panelHeadline" id="volBoxTitle">Gönüllülük Projeleri</h5>
+                        </div>
+                        <div class="panelHead" id="volTitle">
+                            <p>Gönüllülük Projeleri</p>
+                        </div>
+                        <div class="panelBody" id="volBody">
+                            <p class="text-center">Çevrene, toplumuna, veya erişebileceğin her yere büyük bir yardımda bulunabilirsin. Sen de gel ve bu projelerin bir parçası ol!</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 infobox" id="meetBox">
+                        <div class="panelFrontView" id="meetFront">
+                            <h5 class="panelHeadline" id="meetBoxTitle">Senin Gibilerle Çalışma Fırsatı</h5>
+                            <img src="{% static 'base/img/landingPage/handshake.png' %}" id="shakeHands">
+                        </div>
+                        <div class="panelHead" id="meetTitle">
+                            <p>Liselilerle Tanış</p>
+                        </div>
+                        <div class="panelBody" id="meetBody">
+                            <p class="text-center">Yalnız başına yapamayacağın bir fikrin veya projen mi var? Ya da bir konuda yardım mı lazım? Liseliler senin için burada!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="section" id="statSection">
+        <div class="sectionBackground" id="statBG"></div>
+        <div class="container container-fluid" id="siteStats">
+            <div class="row justify-content-xs-center">
+                <div class="col-sm-3 stats" id="intStat">
+                    <div class="colcontainer row">
+                        <div class="statLogoContainer col-lg-6">
+                            <img class="statLogos" src="{% static 'base/img/landingPage/intStatLogo.png' %}">
+                        </div>
+                        <div class="statTexts col-lg-6" id="intstatTexts">
+                            <p class="counter-up" id="intCounter">246</p>
+                            <p class="statName">Staj İmkanı</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 stats" id="volStat">
+                    <div class="colcontainer row">
+                        <div class="statLogoContainer col-lg-6">
+                            <img class="statLogos" src="{% static 'base/img/landingPage/volStatLogo.png' %}">
+                        </div>
+                        <div class="statTexts col-lg-6" id="volstatTexts">
+                            <p class="counter-up" id="volCounter">176</p>
+                            <p class="statName">Gönüllülük Projesi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 stats" id="meetStat">
+                    <div class="colcontainer row">
+                        <div class="statLogoContainer col-lg-6">
+                            <img class="statLogos" src="{% static 'base/img/landingPage/meetStatLogo.png' %}">
+                        </div>
+                        <div class="statTexts col-lg-6" id="meetstatTexts">
+                            <p class="counter-up" id="meetCounter">45</p>
+                            <p class="statName">Liseli Projesi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 stats" id="studentStat">
+                    <div class="colcontainer row">
+                        <div class="statLogoContainer col-lg-6">
+                            <img class="statLogos" src="{% static 'base/img/landingPage/studentStatLogo.png' %}">
+                        </div>
+                        <div class="statTexts col-lg-6" id="studentstatTexts">
+                            <p class="counter-up" id="studentCounter">1271</p>
+                            <p class="statName">Öğrenci</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section container container-fluid" id="slideshow">
+        <div class="row justify-content-sm-center" id="carriesSlides">
+            <div class="col-sm-10" id="slideshowContainer">
+
+                <div class="slideshows" id="carouselMain">
+                  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                      <div class="carousel-item active">
+                        <img class="d-block img-fluid" src="{% static 'base/img/landingPage/yorum.jpg' %}" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                          <h3>First slide label</h3>
+                          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </div>
+                      </div>
+                      <div class="carousel-item">
+                        <img class="d-block img-fluid" src="{% static 'base/img/landingPage/orman.jpg' %}" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                          <h3>Second slide label</h3>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+            </div>
+        </div>
+   </div>
+
+    {% endblock %}
+
+    <footer id="mainFooter">
+        <div class="container container-fluid" id="footLinks">
+            <div class="row justif-content-sm-center">
+                <div class="col-sm-4 footerSection" id="socialLinks">
+                    <h4><i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i> Abone Ol!</h4>
+                    <p class="text">Haftalık bültenimizle yeni gelişmelerden anında haberdar olan 613 öğrenciye siz de katılın.</p>
+                    <input type="text" name="e-mail" id="emailSignup" placeholder="yourmail@example.com">
+                    <button class="btn" type="submit" id="emailSubmit">Kaydol</button>
+                    <div class="row justify-content-sm-center" id="socialdiv">
+                        <div class="col-sm-6 col-lg-3 socialIcon" id="facebook">
+                            <a href="" class="socailLink" id="toFace">
+                                <img class="socialLogo" id="face" src="{% static 'base/img/facebookIcon.png' %}">
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 socialIcon" id="twitter">
+                            <a href="" class="socailLink" id="toTweet">
+                                <img class="socialLogo" id="tweet" src="{% static 'base/img/twitterIcon.png' %}">
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 socialIcon" id="instagram">
+                            <a href="" class="socailLink" id="toInsta">
+                                <img class="socialLogo" id="insta" src="{% static 'base/img/instagramIcon.png' %}">
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-lg-3 socialIcon" id="linkedin">
+                            <a href="" class="socailLink" id="tolinked">
+                                <img class="socialLogo" id="linked" src="{% static 'base/img/linkedinIcon.png' %}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 footerSection" id="aboutBrand">
+                    <h4>Hey Liseli<sup style="font-size:13px;">TM</sup></h4>
+                    <p>Liseli öğrencilere iş tecrübesi edinerek kendilerini geliştirme, gönüllülük bazlı çalışmalara katılarak çevrelerine katkıda bulunabilme, ve bir araya gelerek daha güçlü işlere imza atma olanağı sağlayan gençlik platformu.</p>
+                    <img src="{% static 'base/img/heyliseli_logo_foot.png' %}" id="footLogo">
+                </div>
+                <div class="col-sm-4 footerSection" id="allLinks">
+                    <h4>Linkler</h4>
+                    <div class="row">
+                        <div class="col-xs-6 linkColumns">
+                            <a class="footerLink" href="#">Ana Sayfa</a>
+                            <br>
+                            <a class="footerLink" href="#">Stajlar</a>
+                            <br>
+                            <a class="footerLink" href="#">Liselilerin Projeleri</a>
+                            <br>
+                            <a class="footerLink" href="#">Giriş Yap</a>
+                            <br>
+                        </div>
+                        <div class="col-xs-linkColumns">
+                            <a class="footerLink" href="#">Hakkımızda</a>
+                            <br>
+                            <a class="footerLink" href="#">Gönüllü Projeler</a>
+                            <br>
+                            <a class="footerLink" href="#">Profilim</a>
+                            <br>
+                            <a class="footerLink" href="#">Kayıt Ol</a>
+                            <br>
+                        </div>
+                    </div>
+                    <div id="contact">
+                        <h4>İletişime Geçin</h4>
+                        <p><i class="fa fa-phone fa-lg" aria-hidden="true"></i> Telefon Numaramız: <span class="text-warning">0533 261 10 02</span></p>
+                        <p><i class="fa fa-envelope" aria-hidden="true"></i> Mail Adresimiz: <span class="text-warning">heyliseligenc@gmail.com</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+<!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    {% block script %}
+        <script type="text/javascript">
+            $(function () {
+                $(document).scroll(function () {
+                    var nav = $(".fixed-top");
+                    var navImg=$("#navbarLogo");
+                    nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
+                    $(".textLinks a").toggleClass('noTextShadow', $(this).scrollTop() > nav.height());
+                    nav.toggleClass('scrolledBack', $(this).scrollTop() < nav.height());
+
+                });
+
+                $(".infoBox").hover(function(){
+                        var title=$(this).find(".panelHead");
+                        title.stop(true,false);
+                           title.animate({height:"toggle"});
+                        var panelBody=$(this).find(".panelBody");
+                        panelBody.stop(true,false);
+                           panelBody.animate({height:"toggle"});
+                });
+            });
+        </script>
+    {% endblock%}
 </body>
 </html>
