@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'compressor',
+    'social_django',
     'catalog',
     'registration',
 
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'HeyLiseli.urls'
@@ -66,10 +68,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'HeyLiseli.wsgi.application'
 
@@ -149,3 +154,22 @@ EMAIL_HOST_PASSWORD='liseliaydavebogi'
 EMAIL_PORT=587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'HeyLiseli@genc.com'
+
+
+#Social Auth Backend
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+#Twitter auth
+SOCIAL_AUTH_TWITTER_KEY = '0HhwSzB6sdy1dvuwIMaYomWcV'
+SOCIAL_AUTH_TWITTER_SECRET = 'QsyhkMPCLK0YFaWWUiUoSSy0ifRJtR5byW6zC0jKrkkkTKrTNR'
+
+#Facebook auth
+SOCIAL_AUTH_FACEBOOK_KEY = '1367123683406776'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'edd4ff84ce4aa9e1255eb6f44edd8ac0'
+

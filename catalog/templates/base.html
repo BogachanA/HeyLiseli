@@ -11,10 +11,14 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://use.fontawesome.com/34c9fa160a.js"></script>
+
     {% compress css %}
        <link rel="stylesheet" href="{% static 'base/css/base_css.css' %}">
     {%endcompress %}
-    <title>{% block title %}Hoşgeldin Liseli{% endblock %}</title>
+
+    {% block head %}
+    <title>Hoşgeldin Liseli</title>
+    {% endblock %}
 
 </head>
 <body>
@@ -40,7 +44,7 @@
                     <a href="#" id="toVol">Katkıda Bulun</a>
                 </div>
                 <div class="col-md-4 hidden-sm-down" id="toHome">
-                    <a href="#" ><img src="{% static 'base/img/heyliseli_logo.png' %}" id="navbarLogo"></a>
+                    <a href="{% url 'home' %}" ><img src="{% static 'base/img/heyliseli_logo.png' %}" id="navbarLogo"></a>
                 </div>
                 <div class="col-md-2 textLinks h-100" id="meetLink">
                     <a href="#" id="toMeet">Etkileşime Geç</a>
@@ -141,7 +145,7 @@
                             <img class="statLogos" src="{% static 'base/img/landingPage/intStatLogo.png' %}">
                         </div>
                         <div class="statTexts col-lg-6" id="intstatTexts">
-                            <p class="counter-up" id="intCounter">246</p>
+                            <p><span class="counter counter-up" id="intCounter">246</span></p>
                             <p class="statName">Staj İmkanı</p>
                         </div>
                     </div>
@@ -152,7 +156,7 @@
                             <img class="statLogos" src="{% static 'base/img/landingPage/volStatLogo.png' %}">
                         </div>
                         <div class="statTexts col-lg-6" id="volstatTexts">
-                            <p class="counter-up" id="volCounter">176</p>
+                            <p><span class="counter counter-up" id="volCounter">172</span></p>
                             <p class="statName">Gönüllülük Projesi</p>
                         </div>
                     </div>
@@ -163,7 +167,7 @@
                             <img class="statLogos" src="{% static 'base/img/landingPage/meetStatLogo.png' %}">
                         </div>
                         <div class="statTexts col-lg-6" id="meetstatTexts">
-                            <p class="counter-up" id="meetCounter">45</p>
+                            <p><span class="counter counter-up" id="meetCounter">48</span></p>
                             <p class="statName">Liseli Projesi</p>
                         </div>
                     </div>
@@ -174,7 +178,7 @@
                             <img class="statLogos" src="{% static 'base/img/landingPage/studentStatLogo.png' %}">
                         </div>
                         <div class="statTexts col-lg-6" id="studentstatTexts">
-                            <p class="counter-up" id="studentCounter">1271</p>
+                            <p><span class="counter counter-up" id="studentCounter">1217</span></p>
                             <p class="statName">Öğrenci</p>
                         </div>
                     </div>
@@ -235,22 +239,22 @@
                     <button class="btn" type="submit" id="emailSubmit">Kaydol</button>
                     <div class="row justify-content-sm-center" id="socialdiv">
                         <div class="col-sm-6 col-lg-3 socialIcon" id="facebook">
-                            <a href="" class="socailLink" id="toFace">
+                            <a href="" class="socialLink" id="toFace">
                                 <img class="socialLogo" id="face" src="{% static 'base/img/facebookIcon.png' %}">
                             </a>
                         </div>
                         <div class="col-sm-6 col-lg-3 socialIcon" id="twitter">
-                            <a href="" class="socailLink" id="toTweet">
+                            <a href="" class="socialLink" id="toTweet">
                                 <img class="socialLogo" id="tweet" src="{% static 'base/img/twitterIcon.png' %}">
                             </a>
                         </div>
                         <div class="col-sm-6 col-lg-3 socialIcon" id="instagram">
-                            <a href="" class="socailLink" id="toInsta">
+                            <a href="" class="socialLink" id="toInsta">
                                 <img class="socialLogo" id="insta" src="{% static 'base/img/instagramIcon.png' %}">
                             </a>
                         </div>
                         <div class="col-sm-6 col-lg-3 socialIcon" id="linkedin">
-                            <a href="" class="socailLink" id="tolinked">
+                            <a href="" class="socialLink" id="tolinked">
                                 <img class="socialLogo" id="linked" src="{% static 'base/img/linkedinIcon.png' %}">
                             </a>
                         </div>
@@ -295,8 +299,7 @@
         </div>
     </footer>
 
-
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
+     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -308,18 +311,26 @@
   crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="{% static 'base/js/countUp.js' %}"></script>
+
+
+    <script type="text/javascript">
+    $(function(){
+        $(document).scroll(function () {
+            var nav = $(".fixed-top");
+            var navImg=$("#navbarLogo");
+            nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
+            nav.toggleClass('scrolledBack', $(this).scrollTop() < nav.height());
+        });
+    });
+    </script>
+
+
     {% block script %}
+
         <script type="text/javascript">
             $(function () {
-                $(document).scroll(function () {
-                    var nav = $(".fixed-top");
-                    var navImg=$("#navbarLogo");
-                    nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
-                    $(".textLinks a").toggleClass('noTextShadow', $(this).scrollTop() > nav.height());
-                    nav.toggleClass('scrolledBack', $(this).scrollTop() < nav.height());
-
-                });
-
                 $(".infoBox").hover(function(){
                         var title=$(this).find(".panelHead");
                         title.stop(true,false);
@@ -328,6 +339,22 @@
                         panelBody.stop(true,false);
                            panelBody.animate({height:"toggle"});
                 });
+
+                var intUp=new CountUp("intCounter",0,246,0,5),
+                    volUp=new CountUp("volCounter",0,172,0,5),
+                    meetUp=new CountUp("meetCounter",0,48,0,5),
+                    studentUp=new CountUp("studentCounter",0,172,0,5);
+
+                var timerWP=new Waypoint({
+                    element: $("#meetBox"),
+                    handler: function(direction){
+                        intUp.start();
+                        volUp.start();
+                        meetUp.start();
+                        studentUp.start();
+                    }
+                });
+
             });
         </script>
     {% endblock%}

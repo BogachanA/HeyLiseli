@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name="home"),
     url(r'catalog/', include('catalog.urls'), name="catalog"),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
 ]

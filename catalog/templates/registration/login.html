@@ -1,16 +1,72 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
 
-    {% block title%}HeyLiseli! Giriş yap{% endblock %}</title>
-</head>
-<body>
-{% block body %}
-    <form method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Log In">
-        <input type="hidden" name="next" value="{{next}}">
-    </form>
+{% block head %}
+    <title>HeyLiseli Giriş Yap</title>
+    <link rel="stylesheet" href="{% static 'base/css/login.css' %}">
 {% endblock %}
-</body>
-</html>
+
+
+{% block body %}
+<div id="mainView">
+    <div id="bg-image">
+        <img src="{% static 'base/img/highschool_bg.png' %}" id="back">
+    </div>
+    <div class="container container-fluid" id="logincontainer">
+        <div class="row justify-content-sm-center">
+            <div class="col-md-4" id="loginBox">
+                <div id="loginHead" class="w-100 text-center">
+                    <h1 class="text-center">Giriş Yap</h1>
+                </div>
+                <div class="w-100 text-center" id="loginBody">
+                    <a href="{% url 'registration_register' %}">
+                        <div id="registerLink">
+                            <p class="text-center">...veya Kayıt Ol</p>
+                        </div>
+                    </a>
+                    <i class="fa fa-graduation-cap fa-5x" aria-hidden="true" id="cap"></i>
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <input type="text" name="username" placeholder="Kullanıcı Adın"><br>
+                        <input type="password" name="password" placeholder="Şifren"><br>
+
+                        <!-- TODO insert a remember me button (functional) -->
+                        <button class="hoverButtons" type="submit" id="submitbutton">Giriş Yap</button>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
+                    <hr style="background-color:rgba(241,159,77,0.6)">
+                    <a href="{% url 'social:begin' 'twitter' %}">
+                    <div class="socialButtons hoverButtons" id="twitterLogin">
+                        <p class="socialLoginText"><i class="fa fa-twitter fa-2x align-middle" aria-hidden="true" style="color:white; margin-right:10px;"></i> Twitter ile Giriş Yap</p>
+                    </div>
+                    </a>
+                    <a href="{% url 'social:begin' 'facebook' %}">
+                    <div class="socialButtons hoverButtons" id="facebookLogin">
+                        <p class="socialLoginText"><i class="fa fa-facebook fa-2x align-middle" aria-hidden="true" style="color:white;margin-right:10px;"></i> Facebook ile Giriş Yap</p>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        $("#logincontainer input").focusin(function(){
+            $(this).animate({backgroundColor:"rgba(255,255,255,0.2)",borderBottomStyle:"solid",borderBottomColor:"white"},1000);
+        });
+        $("#logincontainer input").focusout(function(){
+            $(this).animate({backgroundColor:"transparent"});
+            if($(this).val()==""){
+                $(this).animate({borderBottomColor:"transparent"});
+            }
+        });
+    });
+</script>
+{% endblock %}
