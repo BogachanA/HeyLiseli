@@ -1,0 +1,35 @@
+:root{
+    --tangerine: #F19F4D; /*rgb(241,159,77)*/
+    --light:#F9CF00; /*rgb(249,207,0)*/
+    --aluminum: #D9D9D9; /* 217,217,217 */
+    --sblue: #4484CE; /*rgb(68,132,206)*/
+}
+
+
+
+#intHeadline{
+    text-align: center;
+    margin: 0;
+    height: 1200px;
+}
+#intCatWall{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+h1{
+    margin-top: 100px;
+    color: white;
+    font-size: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bolder;
+    text-shadow: 0 0 2px black;
+    background-color: rgba(68,132,206,0.8);
+    padding: 20px;
+    filter: drop-shadow(1px 5px 10px black);
+    position: absolute;
+    top: 90px;  
+    width: 100%;
+}

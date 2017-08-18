@@ -1,30 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:100');
-@import url('https://fonts.googleapis.com/css?family=Poppins:700');
-
-:root{
-    --tangerine: #F19F4D; /*rgb(241,159,77)*/
-    --light:#F9CF00; /*rgb(249,207,0)*/
-    --aluminum: #D9D9D9; /* 217,217,217 */
-    --sblue: #4484CE; /*rgb(68,132,206)*/
-}
 #mainView{
+    height: auto;
     position: static;
-    height: 900px;
-    overflow: hidden;
 }
-#back{
-    width:100%;
-    height: 100%;
+#bg-image{
+    background-image: url('../img/highschool_bg.png');
+    height: 1000px;
 }
 #logincontainer{
     position: absolute;
     z-index: 4;
     width: 100%;
     padding: 0;
-    top: 30%;
+    top: 20%;
 }
 #loginBox{
-    background-color: rgba(241,159,77,0.3);
+    background-color: rgba(241,159,77,0.35);
     box-shadow: 0 0 0px black;
     border-radius: 20px;
     padding: 0;
@@ -44,18 +34,6 @@ h1{
     top: 50%;
     transform: translateY(-50%);
 }
-#registerLink{
-    background-color: rgba(241,159,77,0.3);
-    height: 30px;
-    color: rgb(230,230,230);
-    transition: all 1s ease-in-out;
-    -webkit-transition: all 0.5s ease-in-out;
-}
-#registerLink:hover{
-    transform: scale(1.1,1.5);
-    box-shadow: 0 0 70px rgba(0,0,0,0.7);
-    background-color: var(--tangerine);
-}
 .hoverButtons{
     transition: all 1s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
@@ -66,6 +44,7 @@ h1{
 }
 
 
+
 #cap{
     color: black;
     margin: 20px;
@@ -74,7 +53,7 @@ h1{
 #logincontainer input{
     background-color: transparent;
     border:none;
-    width: 60%;
+    width: 70%;
     margin-bottom: 20px;
     font-size: 20px;
     text-align: center;
@@ -88,17 +67,48 @@ h1{
 #submitbutton{
     border: 1px solid transparent;
     width: 70%;
-    border-radius: 7px;
+    border-radius: 25px;
     color: white;
     background-color: rgba(241,159,77,0.7);
     font-family: 'Roboto',sans-serif;
     font-weight: bold;
+    margin-bottom: 15px;
+}
+#registerbutton{
+    border: 1px solid transparent;
+    width: 70%;
+    border-radius: 25px;
+    color: white;
+    height: 50px;
+    background-color: rgba(241,159,77,0.7);
+    font-family: 'Roboto',sans-serif;
+    font-weight: bold;
+    font-size: 130%;
+    margin: 15px 0;
+    margin-bottom: 25px;
+}
+.longDash{
+    width: 120px;
+    display: inline;
+}
+.hollow{
+    color: rgb(192, 186, 176);
+    font-size: 20px;
+    margin: 15px; 
 }
 .socialButtons{
     width: 70%;
     border-radius: 7px;
     height: 60px;
     margin: 20px auto;
+}
+.middleLine{
+    width: 50px;
+    height: 2px;
+    background-color: rgb(192, 186, 176);
+    display: inline-block;
+    position: relative;
+    top: -5px;
 }
 .socialLoginText{
     font-family: 'Poppins',sans-serif;
@@ -116,6 +126,9 @@ a:hover{
 }
 #facebookLogin{
     background-color: rgba(54, 88, 153,0.8);
+}
+#googleLogin{
+    background-color: rgb(243, 46, 6);
 }
 
 

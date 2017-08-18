@@ -1,51 +1,55 @@
 {% extends 'base.html' %}
-
+{% load compress %}
 {% load staticfiles %}
 
 {% block head %}
     <title>HeyLiseli Giriş Yap</title>
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'base/css/login.css' %}">
+    {% endcompress %}
 {% endblock %}
 
 
 {% block body %}
 <div id="mainView">
-    <div id="bg-image">
-        <img src="{% static 'base/img/highschool_bg.png' %}" id="back">
-    </div>
-    <div class="container container-fluid" id="logincontainer">
-        <div class="row justify-content-sm-center">
-            <div class="col-md-4" id="loginBox">
-                <div id="loginHead" class="w-100 text-center">
-                    <h1 class="text-center">Giriş Yap</h1>
-                </div>
-                <div class="w-100 text-center" id="loginBody">
-                    <a href="{% url 'registration_register' %}">
-                        <div id="registerLink">
-                            <p class="text-center">...veya Kayıt Ol</p>
-                        </div>
-                    </a>
-                    <i class="fa fa-graduation-cap fa-5x" aria-hidden="true" id="cap"></i>
-                    <form method="post" action=".">
-                        {% csrf_token %}
-                        <input type="text" name="username" placeholder="Kullanıcı Adın"><br>
-                        <input type="password" name="password" placeholder="Şifren"><br>
+    <div class="paraxify" id="bg-image">
+        <div class="container-fluid" id="logincontainer">
+            <div class="row justify-content-sm-center">
+                <div class="col-md-4" id="loginBox">
+                    <div id="loginHead" class="w-100 text-center">
+                        <h1 class="text-center">Giriş Yap</h1>
+                    </div>
+                    <div class="w-100 text-center" id="loginBody">
 
-                        <!-- TODO insert a remember me button (functional) -->
-                        <button class="hoverButtons" type="submit" id="submitbutton">Giriş Yap</button>
-                        <input type="hidden" name="next" value="{{next}}">
-                    </form>
-                    <hr style="background-color:rgba(241,159,77,0.6)">
-                    <a href="{% url 'social:begin' 'twitter' %}">
-                    <div class="socialButtons hoverButtons" id="twitterLogin">
-                        <p class="socialLoginText"><i class="fa fa-twitter fa-2x align-middle" aria-hidden="true" style="color:white; margin-right:10px;"></i> Twitter ile Giriş Yap</p>
+                        <i class="fa fa-graduation-cap fa-5x" aria-hidden="true" id="cap"></i>
+                        <form method="post" action=".">
+                            {% csrf_token %}
+                            <input type="text" name="username" placeholder="Kullanıcı Adın"><br>
+                            <input type="password" name="password" placeholder="Şifren"><br>
+
+                            <!-- TODO insert a remember me button (functional) -->
+                            <button class="hoverButtons" type="submit" id="submitbutton">Giriş Yap</button>
+                            <input type="hidden" name="next" value="{{next}}">
+                        </form>
+                        <div class="middleLine"></div> <span class="hollow"> Veya </span> <div class="middleLine"></div><br>
+                        <a href="{% url 'registration_register' %}"><button class="hoverButtons" id="registerbutton">Kayıt Ol!</button> </a>
+                        <hr style="background-color:rgba(241,159,77,0.6)">
+                        <a href="{% url 'social:begin' 'twitter' %}">
+                            <div class="socialButtons hoverButtons" id="twitterLogin">
+                                <p class="socialLoginText"><i class="fa fa-twitter fa-2x align-middle" aria-hidden="true" style="color:white; margin-right:10px;"></i> Twitter ile Giriş Yap</p>
+                            </div>
+                        </a>
+                        <a href="{% url 'social:begin' 'facebook' %}">
+                            <div class="socialButtons hoverButtons" id="facebookLogin">
+                                <p class="socialLoginText"><i class="fa fa-facebook fa-2x align-middle" aria-hidden="true" style="color:white;margin-right:10px;"></i> Facebook ile Giriş Yap</p>
+                            </div>
+                        </a>
+                        <a href="{% url 'social:begin' 'google-oauth2' %}">
+                            <div class="socialButtons hoverButtons" id="googleLogin">
+                                <p class="socialLoginText" ><i class="fa fa-google fa-2x align-middle" aria-hidden="true" style="color:white;margin-right:10px;"></i> Google ile Giriş Yap</p>
+                            </div>
+                        </a>
                     </div>
-                    </a>
-                    <a href="{% url 'social:begin' 'facebook' %}">
-                    <div class="socialButtons hoverButtons" id="facebookLogin">
-                        <p class="socialLoginText"><i class="fa fa-facebook fa-2x align-middle" aria-hidden="true" style="color:white;margin-right:10px;"></i> Facebook ile Giriş Yap</p>
-                    </div>
-                    </a>
                 </div>
             </div>
         </div>

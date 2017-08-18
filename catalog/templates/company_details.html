@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load compress %}
+{% load staticfiles %}
+
+{% block head %}
+<title>{{company}} | Şirket Bilgisi</title>
+{% compress css %}
+<link rel="stylesheet" href="{% static 'base/css/company_details.css' %}">
+{% endcompress %}
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid paraxify" id="mainScreen">
+    <div class="row justify-content-center" id="topRow">
+        <div class="col-5 col-sm-3 hoveringCol" id="companyLogoContainer">
+            <div class="hoveringContainer" id="hoveringImage">
+                <img src="{{company.company_logo.url}}" id="companyLogo">
+            </div>
+        </div>
+        <div class="col-6 col-sm-7 hoveringCol" id="titleContainer">
+            <div class="hoveringContainer" id="hoveringTitle">
+                <h1 class="text-center" id="companyTitle">{{company}}</h1>
+                <hr id="titleSeperator">
+                <div class="row justify-content-sm-center" id="titleInfo">
+                    <div class="col-sm-5 text-sm-center">
+                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <span>{{company.company_field}}</span>
+                    </div>
+                    <div class="col-sm-5 text-sm-center">
+                        <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+                        <span>Kuruluş: {{company.establishment_date}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" id="descAndlinkRow">
+        <div class="col-11 col-sm-10 col-md-7 hoveringCol" id="descContainer">
+            <div class="hoveringContainer" id="hoveringDesc">
+                <div class="row">
+                    <div class="col-4 infoTitle">
+                        <p>Web sitesi</p>
+                    </div>
+                    <div class="col-8 infoAnswer">
+                        <a href="{{company.website}}">
+                            <p id="toWebsite"><i class="fa fa-link" aria-hidden="true"></i> {{company.website}}</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 infoTitle">
+                        <p>Adres</p>
+                    </div>
+                    <div class="col-5 infoAnswer">
+                        <p>{{company.hq_adress}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 infoTitle">
+                        <p>Hakkında</p>
+                    </div>
+                    <div class="col-8 infoAnswer">
+                        <p id="descText">{{company.company_description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-11 col-sm-10 col-md-3 hoveringCol" id="linksContainer">
+            <div class="hoveringContainer" id="hoveringLinks">
+                <div class="row justify-content-center">
+                    <div class="col-4 col-md-12 infoTitle">
+                        <p id="socialTitle">Sosyal Ağlar</p>
+                    </div>
+                    <div class="col-8 col-md-12 infoAnswer" id="socialLinksAnswer">
+                        <a class="aLink" id="faceLink" href="{{social_links.facebook}}" target="_blank">
+                            <div class="row justify-content-center socialRow">
+                                <div class="col-3">
+                                    <div class="circular" id="circFace">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <p class="linkName align-middle"> Facebook</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="aLink" id="twitLink" href="{{social_links.twitter}}" target="_blank">
+                            <div class="row justify-content-center socialRow">
+                                <div class="col-3">
+                                    <div class="circular" id="circTwit">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <p class="linkName align-middle"> Twitter</p>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="aLink" id="inLink" href="{{social_links.linkedin}}" target="_blank">
+                            <div class="row justify-content-center socialRow">
+                                <div class="col-3">
+                                    <div class="circular" id="circIn">
+                                        <i class="fa fa-linkedin" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="col-9">
+                                    <p class="linkName align-middle"> LinkedIn</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+<script type="text/javascript">
+    $( function(){
+
+        var initDesc=$("#descText").html(),
+            finalDesc=initDesc.replace(/;br;/g,"<br>"),
+            finalDesc=finalDesc.replace(/;st;/g,"<strong>"),
+            finalDesc=finalDesc.replace(/;st.;/g,"</strong>"),
+            finalDesc=finalDesc.replace(/--/g,'<br><i class="fa fa-slack" style="color:gray;" aria-hidden="true"></i>');
+
+        $("#descText").html(finalDesc);
+
+    });
+</script>
+{% endblock %}

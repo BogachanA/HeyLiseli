@@ -1,0 +1,130 @@
+body{
+    margin:0;
+}
+#mainScreen{
+    padding: 120px 10px 60px 10px;
+    background-image: url('../img/companyDetail/skyline_dark.jpeg');
+    margin: 0;
+    height: auto;
+}
+.hoveringCol{
+    padding: 20px;
+    
+}
+.hoveringContainer{
+    width: 100%;
+    height: 200px;
+    padding: 25px;
+    background-color: rgba(255,255,255,0.9);
+}
+#companyLogo{
+    width: 100%;
+    height: 150px;
+    margin: auto;
+}
+#companyTitle{
+    margin: 10px auto;
+    font-size: 3.3vw;
+    font-family: 'Quicksand',sans-serif;
+    font-weight: bolder;
+}
+#titleSeperator{
+    width: 40%;
+    margin: 25px auto;
+    height: 3px;
+    background-color: var(--sblue);
+}
+.infoTitle{
+    font-family: 'Poiret One', sans-serif;
+    font-weight: bolder;
+    font-size: 140%;
+    padding-top: 0;
+}
+.infoAnswer{
+    font-family: 'Comfortaa',sans-serif;
+    padding-top: 5px;
+    font-size: 14px;
+}
+.infoAnswer strong{
+    font-family: 'Jockey One',sans-serif;
+    font-size: 140%;
+}
+#hoveringDesc{
+    height: auto;
+}
+#descAndlinkRow .row{
+    margin: 20px 0;
+}
+
+#hoveringLinks{
+    height: auto;
+}
+.circular{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-size: 25px;
+    text-align: center;
+    display: inline-block;
+}
+#circFace{
+    background-color:rgb(59, 89, 152);
+}
+#circTwit{
+    background-color: rgb(0, 172, 237);
+}
+#circIn{
+    background-color: rgb(0, 119, 181);
+}
+.linkName{
+    font-family: 'Abel',sans-serif;
+    font-size: 20px;
+    color: gray;
+    display: inline-block;
+}
+#socialTitle{
+    margin: 0;
+}
+.socialRow{
+    padding: 10px 0;
+    height: 50px;
+    margin:0 !important;
+    overflow: hidden;
+}
+.socialRow:hover{
+    background-color: rgb(255,255,255);
+}
+
+
+@media(max-width:992px)and(min-width:767px){
+}
+@media(max-width: 767px){
+    #companyTitle{
+        font-size: 28px;
+    }
+    .hoveringCol{
+        padding: 0;
+    }
+    .infoAnswer{
+        font-size: 15px;
+    }
+    #descContainer{
+        margin-top: 30px;
+    }
+}
+@media(max-width: 575px){
+    #companyTitle{
+        font-size: 25px;
+        margin-top: -5px;
+    }
+    #mainScreen hr{
+        margin: 10px auto;   
+    }
+    #titleInfo i{
+        margin: 5px auto;
+    }
+    .infoAnswer{
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load compress %}
+
+{%  block head %}
+    <title>Staj Kataloğu</title>
+    {% compress css %}
+       <link rel="stylesheet" href="{% static 'base/css/internships_main.css' %}">
+    {% endcompress %}
+{% endblock %}
+
+
+{% block body %}
+
+<article class="jumbotron jumbotron-fluid" id="intHeadline">
+    <img src="{% static 'base/img/intMain/Desk.jpg' %}" class="paraWall" id="intCatWall" data-parallax="{'y':300}">
+    <h1>Staj İmkanları</h1>
+    <div class="container container-fluid" id="intCatalogFront">
+        <div class="row justify-content-sm-center">
+        </div>
+    </div>
+</article>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

@@ -16,12 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^cokgizligiris/', admin.site.urls),
     url(r'^$', views.home, name="home"),
     url(r'catalog/', include('catalog.urls'), name="catalog"),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

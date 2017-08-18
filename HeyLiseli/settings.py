@@ -123,6 +123,9 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Custom user model declaration
+AUTH_USER_MODEL = 'catalog.Liseli'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -161,7 +164,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
-
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -173,3 +176,10 @@ SOCIAL_AUTH_TWITTER_SECRET = 'QsyhkMPCLK0YFaWWUiUoSSy0ifRJtR5byW6zC0jKrkkkTKrTNR
 SOCIAL_AUTH_FACEBOOK_KEY = '1367123683406776'
 SOCIAL_AUTH_FACEBOOK_SECRET = 'edd4ff84ce4aa9e1255eb6f44edd8ac0'
 
+#Google auth
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY ="227583987065-u4qc27kikmgq0qdgmh0ord97prq5ui31.apps.googleusercontent.com"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET ="DGsAfKYIaw6ImRAOUbU1N8Zx"
+SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = [
+    'https://www.googleapis.com/auth/plus.login',
+    'https://www.googleapis.com/auth/userinfo.email',
+]

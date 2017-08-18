@@ -1,0 +1,416 @@
+@keyframes wowlogo{
+    0%{transform: rotate(0deg) scale(3,5) translateY(40px) translateX(400px);}
+    50%{transform: rotate(-30deg) scale(4,6) translateY(40px);}
+    100%{transform: rotate(0deg) scale(1,1) translateY(0) translateX(0);}
+}
+#toHome img{
+    transform: scale(3,5) rotate(0deg) translateY(40px) translateX(400px);
+    animation-name: wowlogo;
+    animation-duration: 2.5s;
+    animation-iteration-count: 1;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+    z-index: 5;
+}
+
+#jumbo{
+    background-image: url("../img/landingPage/graduate.jpg");
+    padding-bottom: 50px;
+    margin-bottom: 0px;
+}
+#jumboText{
+    padding: 30px 60px;
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font-family: 'Droid Sans', sans-serif;
+    text-align: center;
+}
+#merhaba{
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+#jumboText h1{
+    border-bottom: 6px solid var(--light);
+    width: 70%;
+    font-size: 40px;
+    margin: 10px auto;
+    padding-bottom: 9px;
+    font-family: 'Droid Sans', sans-serif;
+    font-weight: bold;
+    font-weight: 300;
+    color: white;
+}
+#regi{
+    background-color: white;
+    width: 170px;
+    height: 60px;
+    border: 3px solid var(--tangerine);
+    border-radius: 10px;
+    color: var(--tangerine);
+    font-weight: bold;
+}
+#infoPanel{
+    background-image: url("../img/landingPage/gri-doku.jpg");
+    background-repeat: repeat;
+    background-position: top;
+    background-size: auto;
+    margin: 0;
+    width: 100%;
+}
+#about{
+    margin: 20px 20px;
+}
+.infobox{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: 5px solid var(--aluminum);
+    height: 200px;
+    margin: 10px;
+    padding: 0;
+    overflow: hidden;
+}
+#intBox{
+    border-top-right-radius: 0;
+    background-color: rgb(98,162,236);
+}
+#volBox{
+    border-radius: 0;
+    background-color: var(--sblue);
+}
+#meetBox{
+    border-top-left-radius: 0;
+    background-color: rgb(18,82,156);
+}
+.panelHead{
+    font-size: 23px;
+    border-bottom: 1px solid var(--aluminum);
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    padding-top: 5px;
+    display: none;
+    font-style: italic;
+    background-color: rgb(241,159,77);
+    
+    color: white;
+    font-weight: bold;
+    position: relative;
+    z-index: 3;
+}
+.panelHead p{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+.panelBody{
+    padding: 10px 15px 0px 15px;
+    background-color: rgb(201,119,37);
+    color: var(--aluminum);
+    font-size: 15.9px;
+    width: 100%;
+    height: 140px;
+    position:absolute; 
+    display: none;
+    bottom:0px;
+    z-index: 4;
+}
+.panelBody p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2vw;
+}
+.panelFrontView{
+    position: absolute;
+    display: block;
+    text-align: center;
+    width: inherit;
+    height: inherit;
+}
+.panelFrontView img{
+    width: 80%;
+    height: 60%;
+    display: block;
+    margin: 10px auto;
+    filter: drop-shadow(0 0 3px black);
+    
+}
+.panelHeadline{
+    color: var(--aluminum);
+    text-shadow: 0 0 15px black;
+    font-family: 'Black Ops One', sans-serif;
+    width: 80%;
+    font-size: 20px;
+    margin: 15px auto;
+    padding: 0;
+    
+}
+#volFront{
+    padding: 0;
+}
+#volHands{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+#volTitle{
+    font-size: 17px;
+}
+#volBoxTitle{
+    position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+    z-index: 2;
+    font-size: 25px;
+}
+#meetBoxTitle{
+    width: 100%;
+}
+#shakeHands{
+    width: 100%;
+    height: 50%;
+}
+#statSection{
+    width: 100%;
+    height: 580px;
+    margin: 0;
+    padding: 0;
+}
+#statBG{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url("../img/landingPage/highschool_entrance.png");
+    z-index: -2;
+}
+#siteStats{
+    background: rgba(217,217,217,0.7);
+    width: 100%;
+    position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+}
+.statLogoContainer{
+    
+}
+.statLogos{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%); /*TODO safari top 50% error */
+    transform: translateY(-50%);
+}
+.statTexts{
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    border-left: 1px solid white;
+    padding: 10px;
+}
+.colcontainer{
+    width: 100%;
+    padding: 10px;
+}
+.counter-up{
+    font-size: 40px;
+    line-height: 30px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px gray;
+}
+.statName{
+    font-family: 'Roboto', sans-serif;
+    font-size: 23px;
+    font-weight: bold;
+    text-shadow: 0 0 5px gray;
+}
+
+#slideshow{
+    height: 580px;
+    width: 100%;
+    background-image: url("../img/landingPage/chalkboard.jpeg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: 20px ridge rgb(200, 144, 97);
+    
+}
+.slideshows{
+    width: 100%;
+    height: 400px;
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.slideshows img{
+    width: 70%;
+    height: 70%;
+    margin: 10px auto;
+}
+#carriesSlides{
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+#slideshowContainer{
+    background-image: url("../img/landingPage/bi.png");
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
+
+@media (max-width:991px){
+    .statTexts{
+        border-left: none;
+        border-top: 1px solid white;
+        margin-top: 10px;
+    }
+}
+@media(max-width: 991px) and (min-width: 767px){
+    .panelBody p{
+        font-size: 1.3vw;
+    }
+    .panelHead{
+        font-size: 2.3vw;
+    }
+    #volTitle p{
+        font-size: 13px;
+    }
+    .panelHeadline{
+        font-size: 20px;
+    }
+    #volBoxTitle{
+        font-size: 17px;
+        top: 45%;
+    }
+    #volTitle{
+        font-size: 20px;
+        padding-top: 10px;
+    }
+}
+@media (max-width:930px) and (min-width:767px){
+    #meetBoxTitle{
+        margin-bottom: -15px;
+    }
+}
+@media(max-width: 767px){ 
+    .panelBody p{
+        font-size: 3.2vw;
+    }
+    .panelHead p{
+        font-size: 25px;
+    }
+    .panelFrontView img{
+        width: 40% ;
+        margin-left: 15px ;
+        margin-top: 5% ;
+        float: left;
+    }
+    .panelHeadline{
+        position: relative;
+        width: 400px;
+        top: 20%;
+        left: 10%;
+        font-size: 40px ;
+        text-align: left;
+    } 
+    #volHands{
+        width: 900px;
+        margin-top: -10px ;
+        margin-left: -150px;
+    }
+    #intBoxTitle{
+        font-size: 30px;
+        width: 70%;
+    }
+    #volBoxTitle{
+        margin-left: 13%;
+        top: 40%;
+    }
+    #meetBoxTitle{
+        margin-top: -30px;
+        width: 80%;
+        margin-left:0;
+        font-size: 25px;
+        text-align: center;
+    }
+    #shakeHands{
+        margin-left: 0;
+        height: 60%;
+    }
+}
+@media(max-width: 575px){
+    #volHands{
+        width: 1000px ;
+        margin-left: -200px ;
+    }
+    #volBoxTitle{
+        font-size: 24px;
+    }
+    #intFront{
+        padding-top: 20px;
+    }
+    #intBoxTitle{
+        font-size: 20px;
+        width: 80%;
+        margin-top: 40px;
+    }
+    .colcontainer{
+        display: table;
+    }
+    .statLogoContainer{
+        display: table-cell;
+        width: 150px;
+        padding: 10px;
+    }
+    .statLogos{
+        -webkit-transform: translateY(0%);
+        transform: translateY(0%);
+    }
+    .statTexts{
+        border-left: 1px solid white;
+        border-top:none;
+        display: table-cell;
+    }
+    #statSection{
+        height: 668px;
+    }
+    #statBG{
+        height: 700px;
+    }
+    
+}
+@media(max-width: 505px){
+    .panelHeadline{
+        position: relative;
+        width: 300px;
+        top: 20%;
+        font-size: 25px;
+        text-align: left;
+    }
+    .panelBody p{
+        font-size: 17px;
+    }
+    #volBoxTitle{
+        width: 60%;
+        text-align: center;
+    }
+    #meetBoxTitle{
+    }
+}
+@media only screen and (max-device-width: 500px) {
+    #statBG {
+        background-attachment: scroll;
+    }
+}

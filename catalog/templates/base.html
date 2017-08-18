@@ -2,48 +2,57 @@
 {% load staticfiles %}
 
 {% load compress %}
-
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Abel|Black+Ops+One|Comfortaa:400,700|Droid+Sans:400,700|Jockey+One|Poiret+One|Poppins:400,700|Quicksand:300,400,700|Roboto:400,700" rel="stylesheet">
     <script src="https://use.fontawesome.com/34c9fa160a.js"></script>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+
+
     {% compress css %}
-       <link rel="stylesheet" href="{% static 'base/css/base_css.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/base_css.css' %}">
     {%endcompress %}
 
     {% block head %}
     <title>Hoşgeldin Liseli</title>
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'base/css/landing_page.css' %}">
+    {% endcompress %}
     {% endblock %}
 
 </head>
 <body>
 
-    <nav class="navbar navbar-toggleable-sm fixed-top navbar-light" id="navigate">
+    <nav class="navbar navbar-expand-md fixed-top navbar-light" id="navigate" data-aos="fade-in" data-aos-delay="500">
 
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#NavDropdown" aria-controls="NavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-        <div class="col-2  hidden-md-up" id="logoOnSmallDiv" style="width:200px;height:80px;margin-top:-15px;margin-left:-25px;">
+        <div class="col-2 d-block d-md-none" id="logoOnSmallDiv" style="width:200px;height:80px;margin-top:-15px;margin-left:-25px;">
         <a class="navbar-brand" href="#" id="logoOnSmall" > <img src="{% static 'base/img/heyliseli_logo2.png' %}" style="width:200px;height:120px;"></a>
         </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#NavDropdown" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
       <div class="collapse navbar-collapse" id="NavDropdown">
           <div class="container container-fluid">
             <div class="row justify-content-sm-center align-items-center" style="height:60px;" id="links">
-                <hr class="hidden-md-up">
+
                 <div class="col-md-2 textLinks h-100" id="intsLink">
-                    <a href="#" id="toInts">Tecrübe Edin</a>
+                    <a href="{% url 'stajlar' %}" id="toInts">Tecrübe Edin</a>
                 </div>
                 <hr>
                 <div class="col-md-2 textLinks h-100" id="volsLink">
                     <a href="#" id="toVol">Katkıda Bulun</a>
                 </div>
-                <div class="col-md-4 hidden-sm-down" id="toHome">
+                <div class="col-md-4 d-none d-md-block" id="toHome">
                     <a href="{% url 'home' %}" ><img src="{% static 'base/img/heyliseli_logo.png' %}" id="navbarLogo"></a>
                 </div>
                 <div class="col-md-2 textLinks h-100" id="meetLink">
@@ -70,22 +79,22 @@
 
     {% block body %}
 
-    <div class="jumbotron jumbotron-fluid text-md-center" id="jumbo">
+    <div class="jumbotron text-md-center paraxify" id="jumbo" data-aos="fade-up" data-aos-delay="1600" data-aos-duration="800">
         <div class="container container-fluid" id="jumboText">
             <div class="row">
-                <div class="col-md-7 offset-5" id="merhaba">
+                <div class="col-md-7 ml-md-auto" id="merhaba" data-aos="fade-right" data-aos-delay="2500" data-aos-duration="900">
                     <h1>Merhaba Liseli, <br>Doğru Yere Geldin...</h1>
                     <p class="text-secondary" style="font-size:20px; color: var(--aluminum);">Hayatın boyunca sana hep bir sürü fırsata sahip olduğunu söyleyip durdular. Fakat fark etmişsindir ki, bu fırsatlara erişmek o kadar kolay değil herkes için.</p>
-                    <button class="btn" type="button" id="regi">Şimdi Kaydol!</button>
+                    <button class="btn" type="button" id="regi" data-aos="fade-right" data-aos-delay="3000">Şimdi Kaydol!</button>
                 </div>
             </div>
         </div>
     </div>
 
     <hr>
-    <div class="container" id=" infoPanel">
-        <div class="row">
-            <div class="col-xs-9 offset-1" id="about">
+    <div class="container-fluid" id="infoPanel">
+        <div class="row justify-content-center">
+            <div class="col-9" id="about" data-aos="fade-up" data-aos-easing="ease-in-out-back" data-aos-offset="200">
                 <h1>Artık Mümkün!</h1>
                 <p class="text-muted">Senin kendini geliştirmeye ne kadar önem verdiğini, ve bu yolda çektiğin sıkıntıları biliyoruz.</p>
                 <p class="text-muted">Şimdi HeyLiseli platformu sayesinde bunu çok daha kolayca yapabileceksin!
@@ -93,10 +102,10 @@
                 <br>
                 <div class="row justify-content-sm-center" id="3info">
 
-                    <div class="col-md-3 infobox" id="intBox">
+                    <div class="col-md-3 infobox" id="intBox" >
                         <div class="panelFrontView" id="intFront">
                             <img src="{% static 'base/img/landingPage/suitcase.png' %}">
-                            <h5 class="panelHeadline">Staj İmkanları</h5>
+                            <h5 class="panelHeadline" id="intBoxTitle">Staj İmkanları</h5>
                         </div>
                         <div class="panelHead" id="intTitle">
                             <p>Staj İmkanları</p>
@@ -105,7 +114,7 @@
                             <p class="text-center">Artık iş tecrübesi edinmek çok kolay. Senin için topladığımız onlarca teklif arasından sadece seçim yapman yeterli!</p>
                         </div>
                     </div>
-                    <div class="col-md-3 infobox" id="volBox">
+                    <div class="col-md-3 infobox" id="volBox" >
                         <div class="panelFrontView" id="volFront">
                             <img src="{% static 'base/img/landingPage/volunteer.png' %}" id="volHands">
                             <h5 class="panelHeadline" id="volBoxTitle">Gönüllülük Projeleri</h5>
@@ -117,7 +126,7 @@
                             <p class="text-center">Çevrene, toplumuna, veya erişebileceğin her yere büyük bir yardımda bulunabilirsin. Sen de gel ve bu projelerin bir parçası ol!</p>
                         </div>
                     </div>
-                    <div class="col-md-3 infobox" id="meetBox">
+                    <div class="col-md-3 infobox" id="meetBox" >
                         <div class="panelFrontView" id="meetFront">
                             <h5 class="panelHeadline" id="meetBoxTitle">Senin Gibilerle Çalışma Fırsatı</h5>
                             <img src="{% static 'base/img/landingPage/handshake.png' %}" id="shakeHands">
@@ -136,9 +145,9 @@
     <hr>
 
     <div class="section" id="statSection">
-        <div class="sectionBackground" id="statBG"></div>
-        <div class="container container-fluid" id="siteStats">
-            <div class="row justify-content-xs-center">
+        <div class="sectionBackground paraxify" id="statBG"></div>
+        <div class="container-fluid" id="siteStats">
+            <div class="row justify-content-xs-center" data-aos="slide-right" data-aos-duration="400" data-aos-offset="0">
                 <div class="col-sm-3 stats" id="intStat">
                     <div class="colcontainer row">
                         <div class="statLogoContainer col-lg-6">
@@ -187,8 +196,8 @@
         </div>
     </div>
 
-    <div class="section container container-fluid" id="slideshow">
-        <div class="row justify-content-sm-center" id="carriesSlides">
+    <div class="section container-fluid" id="slideshow">
+        <div class="row justify-content-center" id="carriesSlides">
             <div class="col-sm-10" id="slideshowContainer">
 
                 <div class="slideshows" id="carouselMain">
@@ -230,45 +239,45 @@
     {% endblock %}
 
     <footer id="mainFooter">
-        <div class="container container-fluid" id="footLinks">
-            <div class="row justif-content-sm-center">
-                <div class="col-sm-4 footerSection" id="socialLinks">
+        <div class="container-fluid" id="footLinks">
+            <div class="row justify-content-center">
+                <div class="col-md-4 footerSection" id="socialLinks">
                     <h4><i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i> Abone Ol!</h4>
                     <p class="text">Haftalık bültenimizle yeni gelişmelerden anında haberdar olan 613 öğrenciye siz de katılın.</p>
                     <input type="text" name="e-mail" id="emailSignup" placeholder="yourmail@example.com">
                     <button class="btn" type="submit" id="emailSubmit">Kaydol</button>
                     <div class="row justify-content-sm-center" id="socialdiv">
-                        <div class="col-sm-6 col-lg-3 socialIcon" id="facebook">
+                        <div class="col-md-6 col-lg-3 socialIcon" id="facebook">
                             <a href="" class="socialLink" id="toFace">
                                 <img class="socialLogo" id="face" src="{% static 'base/img/facebookIcon.png' %}">
                             </a>
                         </div>
-                        <div class="col-sm-6 col-lg-3 socialIcon" id="twitter">
+                        <div class="col-md-6 col-lg-3 socialIcon" id="twitter">
                             <a href="" class="socialLink" id="toTweet">
                                 <img class="socialLogo" id="tweet" src="{% static 'base/img/twitterIcon.png' %}">
                             </a>
                         </div>
-                        <div class="col-sm-6 col-lg-3 socialIcon" id="instagram">
+                        <div class="col-md-6 col-lg-3 socialIcon" id="instagram">
                             <a href="" class="socialLink" id="toInsta">
                                 <img class="socialLogo" id="insta" src="{% static 'base/img/instagramIcon.png' %}">
                             </a>
                         </div>
-                        <div class="col-sm-6 col-lg-3 socialIcon" id="linkedin">
+                        <div class="col-md-6 col-lg-3 socialIcon" id="linkedin">
                             <a href="" class="socialLink" id="tolinked">
                                 <img class="socialLogo" id="linked" src="{% static 'base/img/linkedinIcon.png' %}">
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 footerSection" id="aboutBrand">
+                <div class="col-md-4 footerSection" id="aboutBrand">
                     <h4>Hey Liseli<sup style="font-size:13px;">TM</sup></h4>
                     <p>Liseli öğrencilere iş tecrübesi edinerek kendilerini geliştirme, gönüllülük bazlı çalışmalara katılarak çevrelerine katkıda bulunabilme, ve bir araya gelerek daha güçlü işlere imza atma olanağı sağlayan gençlik platformu.</p>
                     <img src="{% static 'base/img/heyliseli_logo_foot.png' %}" id="footLogo">
                 </div>
-                <div class="col-sm-4 footerSection" id="allLinks">
+                <div class="col-md-4 footerSection" id="allLinks">
                     <h4>Linkler</h4>
                     <div class="row">
-                        <div class="col-xs-6 linkColumns">
+                        <div class="col-6 linkColumns">
                             <a class="footerLink" href="#">Ana Sayfa</a>
                             <br>
                             <a class="footerLink" href="#">Stajlar</a>
@@ -278,7 +287,7 @@
                             <a class="footerLink" href="#">Giriş Yap</a>
                             <br>
                         </div>
-                        <div class="col-xs-linkColumns">
+                        <div class="col-6 linkColumns">
                             <a class="footerLink" href="#">Hakkımızda</a>
                             <br>
                             <a class="footerLink" href="#">Gönüllü Projeler</a>
@@ -299,20 +308,34 @@
         </div>
     </footer>
 
-     <!-- jQuery first, then Tether, then Bootstrap JS. -->
+
+    <!-- Bootstrap JS -->
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    {% compress js %}
     <script src="{% static 'base/js/countUp.js' %}"></script>
+    <script src="{% static 'base/js/aos.js' %}"></script>
+    <script src="{% static 'base/js/paraxify.min.js' %}"></script>
+    {% endcompress %}
+
+    <script type="text/javascript">
+        var myParaxify = paraxify('.paraxify', {
+            speed: 1,
+            boost: 0.3,
+        });
+    </script>
 
 
     <script type="text/javascript">
@@ -325,25 +348,32 @@
         });
     });
     </script>
+    <script type="text/javascript">
+        AOS.init({
+            easing:'ease-in-cubic',
+            duration:600,
+            delay:200,
+        });
+    </script>
 
 
     {% block script %}
 
         <script type="text/javascript">
             $(function () {
-                $(".infoBox").hover(function(){
-                        var title=$(this).find(".panelHead");
-                        title.stop(true,false);
-                           title.animate({height:"toggle"});
-                        var panelBody=$(this).find(".panelBody");
-                        panelBody.stop(true,false);
-                           panelBody.animate({height:"toggle"});
+                $(".infobox").hover(function(){
+                    var title=$(this).find(".panelHead");
+                    title.stop(true,false);
+                    title.animate({height:"toggle"});
+                    var panelBody=$(this).find(".panelBody");
+                    panelBody.stop(true,false);
+                    panelBody.animate({height:"toggle"});
                 });
 
-                var intUp=new CountUp("intCounter",0,246,0,5),
-                    volUp=new CountUp("volCounter",0,172,0,5),
-                    meetUp=new CountUp("meetCounter",0,48,0,5),
-                    studentUp=new CountUp("studentCounter",0,172,0,5);
+                var intUp=new CountUp("intCounter",0,246,0,3),
+                    volUp=new CountUp("volCounter",0,172,0,3),
+                    meetUp=new CountUp("meetCounter",0,48,0,3),
+                    studentUp=new CountUp("studentCounter",0,324,0,3);
 
                 var timerWP=new Waypoint({
                     element: $("#meetBox"),
