@@ -13,7 +13,6 @@ def internship_detail(request, internship_id):
     context={
         'internship':internship,
     }
-
     return render(request, 'internship_catalog/internship_details.html',context)
 
 
@@ -25,7 +24,7 @@ def company_detail(request, company_id):
         'social_links': social_links,
     }
     intset=Internship.objects.filter(provider=company)
-    #Volset for volunteer after building the model#
+    # TODO Volset for volunteer after building the model#
     if intset.exists():
         context['ints_of_comp']=intset
 

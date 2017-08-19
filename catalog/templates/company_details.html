@@ -73,10 +73,10 @@
                         <p id="socialTitle">Sosyal Ağlar</p>
                     </div>
                     <div class="col-8 col-md-12 infoAnswer" id="socialLinksAnswer">
-                        {% for key in social_links.keys %}
+                        {% for key, value in social_links.items %}
                             {% if not social_links.key == "none" %}
                                 {% with keyShort=key|substring:'0,4' %}
-                                    <a class="aLink" id="{{keyShort}}Link" href="{{social_links.key}}" target="_blank">
+                                    <a class="aLink" id="{{keyShort}}Link" href="{{value}}" target="_blank">
                                         <div class="row justify-content-center socialRow">
                                             <div class="col-3">
                                                 <div class="circular" id="circ{{keyShort|title}}">
@@ -97,6 +97,55 @@
             </div>
         </div>
     </div>
+    {% if ints_of_comp %}
+    <div class="row justify-content-center" id="intsTitle">
+        <div class="col-11 col-sm-10 hoveringCol" id="intTitleContainer">
+            <div class="hoveringContainer" id="hoveringIntTitle">
+                <h2>{{company}} {{'tarafından verilen staj ilanları'|title}}</h2>
+            </div>
+        </div>
+    </div>
+    {%for internship in ints_of_comp %}
+    <div class="row justify-content-center justify-content-sm-start intsRow">
+        <div class="col-sm-1 d-none d-sm-block"></div>
+        <div class="col-11
+                    {% if ints_of_comp|len == 1 %}
+                    col-sm-10
+                    {% else %}
+                    col-sm-5
+                    {% endif %}
+                    hoveringCol intContainer">
+            <div class="hoveringContainer hoveringInts">
+                <div class="row intRow">
+                    <div class="col-12 col-sm-6 intImageCol">
+                        <img src="{{internship.cover_img.url}}" class="intImage">
+                    </div>
+                    <div class="col-12 col-sm-6 intInfoCol">
+                        <h3 class="intTitle">{{internship.name}}</h3>
+                        <br>
+                        <div class="row justify-content-around text-center">
+                            <div class="col-4">
+                                <span class="text-muted anInfo"><i class="fa fa-th-large" aria-hidden="true"></i> {{internship.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="text-muted anInfo"><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{internship.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="text-muted anInfo"><i class="fa fa-hourglass" aria-hidden="true"></i> {{internship.time_frame}}</span>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-12 buttonCol">
+                                <a href="{% url 'detay' internship.id %}"><button type="button" class="btn toIntButton">Daha Fazla Bilgi</button> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
 </div>
 
 {% endblock %}

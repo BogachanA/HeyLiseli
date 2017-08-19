@@ -10,3 +10,7 @@ def substring(value,arguments):
     start=int(args[0])
     end=int(args[1])
     return value[start:end]
+
+@register.filter(name='len',is_safe=True)
+def getLength(value):
+    return len(value)
