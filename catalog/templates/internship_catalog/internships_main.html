@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load customFilters %}
 {% load compress %}
 
 {%  block head %}
@@ -7,24 +8,318 @@
     {% compress css %}
        <link rel="stylesheet" href="{% static 'base/css/internships_main.css' %}">
     {% endcompress %}
+
+    <style rel="stylesheet">
+
+    </style>
 {% endblock %}
 
 
 {% block body %}
 
-<article class="jumbotron jumbotron-fluid" id="intHeadline">
-    <img src="{% static 'base/img/intMain/Desk.jpg' %}" class="paraWall" id="intCatWall" data-parallax="{'y':300}">
-    <h1>Staj İmkanları</h1>
-    <div class="container container-fluid" id="intCatalogFront">
-        <div class="row justify-content-sm-center">
+<article class="jumbotron jumbotron-fluid text-center paraxify" id="intHeadline">
+    <h1 id="pageTitle">Staj İmkanları</h1>
+</article>
+<div class="placeholder d-none" id="searchPlaceholder"></div>
+<div class="container-fluid section" id="searchBoxSection">
+    <div class="row justify-content-center justify-content-sm-end">
+        <div class="col-11 col-sm-5 col-md-4" id="searchContainer" data-aos="slide-left" data-aos-duration="600" data-aos-delay="1000">
+            <input type="text" id="searchBox" placeholder="Staj Ara...">
+            <button type="submit" id="searchIcon"><i class="fa fa-search" aria-hidden="true"></i></button>
         </div>
     </div>
-</article>
+</div>
+<div class="container-fluid section" id="categoriesSection">
+    <div class="row justify-content-center" id="categoriesRow">
+        <div class="col-11 col-md-9 text-center " id="categoriesCol" data-aos="fade-up" data-aos-delay="1200" data-aos-duration="600">
+            <div id="forCoolBorder">
+                <h1 id="catTitle">Kategoriler</h1><br>
+                <div class="row justify-content-center">
+                    {% for cat in categories %}
+                    <div class="col-6 col-md-4 catContainer">
+                        <div class="category text-center" id="cat{{cat.id}}">
+                            <h3 class="catName">{{cat.name}}</h3>
+                            <img src="{{cat.icon.url}}" class="align-self-center catImg">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="w-100 text-center btn-outline-secondary" id="moreButton">
+                    <div id="circleChevron">
+                        <i class="fa fa-angle-double-down fa-2x" id="down" aria-hidden="true"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row titleRow" id="topIntsTitle">
+        <div id="topTitleContainer">
+            <h2 id="topTitle">En Çok Görüntülenen Stajlar</h2>
+        </div>
+    </div>
+    <div class="row justify-content-center d-flex">
+        <div class="buttonDiv col-1 align-self-center" id="buttonLeft">
+            <button class="scrollButton" id="scrollTopIntsLeft">
+                <div class="triangle" id="triangleLeft"></div>
+            </button>
+        </div>
+        <div class="col-9 col-md-10 text-center" id="topIntsContainer">
+            <div id="forCoolBorder2">
+                <div class="row " id="scrollingCards">
+                    {% for int in top_list %}
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 intCardContainer">
+                        <div class="forCoolBorder3">
+                            <div class="intCard">
+                                <div class="forInsetShadow">
+                                    <img src="{{int.cover_img.url}}" class="topIntImage">
+                                </div>
+                                <img src="{{int.provider.company_logo.url}}" class="topIntCompImage">
+
+                                <h4 class="topIntTitle">{{int.name}}</h4>
+                                <div class="text-muted text-center text-sm-left anInfo"><i class="fa fa-th-large" aria-hidden="true"></i> {{int.category}}</div>
+                                <div class="text-muted text-center text-sm-left anInfo"><i class="fa fa-thumb-tack" aria-hidden="true"></i> {{int.location}}</div>
+                                <div class="text-muted text-center text-sm-left anInfo anInfoBottom"><i class="fa fa-hourglass" aria-hidden="true"></i> {{int.time_frame}}</div>
+                                <a href="{%url 'detay' int.id %}" class="detailButton">
+                                <button class="toIntDetails">Daha Fazla Bilgi</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="buttonDiv col-1 align-self-center" id="buttonRight">
+            <button class="scrollButton" id="scrollTopIntsRight">
+                <div class="triangle" id="triangleRight"></div>
+            </button>
+        </div>
+    </div>
+    <div class="row justify-content-center" id="letterRow">
+        <div class="col-11 col-sm-10 col-md-5 buttonCol">
+            <div class="btn-group buttonLine" id="buttonLine1" role="group" aria-label="Baş Harfe Göre Filtrele">
+            {% with halflength=letters|len|div:"2" %}
+                {% with half=halflength|floatformat:'0'|tostr %}
+            {% with indexes=half|_add:"0:" %}
+                {% for letter in letters|slice:indexes %}
+                <button class="btn letterButton">
+                    <a class="buttonLink" href="{% url 'stajlar_harf' letter %}">
+                        <div class="clickable">
+                        <div class="buttonText">{{letter|title}}</div>
+                        </div>
+                    </a>
+                </button>
+                {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="col-11 col-sm-10 col-md-5 buttonCol">
+            <div class="btn-group buttonLine" id="buttonLine2" role="group" aria-label="Baş Harfe Göre Filtrele">
+                 {% with indexes=half|add_:":" %}
+                {% for letter in letters|slice:indexes %}
+                <button class="btn letterButton">
+                    <a class="buttonLink" href="{% url 'stajlar_harf' letter %}">
+                        <div class="clickable">
+                        <div class="buttonText">{{letter|title}}</div>
+                        </div>
+                    </a>
+                </button>
+                {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+            {% endwith %}
+            {% endwith %}
+    </div>
+
+        {% for int in letter_ints %}
+    <div class="letterIntRow row justify-content-center" data-aos="fade-left" data-aos-duration="400">
+        <div class="col-11 col-sm-10 col-md-9 letIntCol">
+            <div class="letIntCont">
+                <div class="row justify-content-center">
+                    <div class="col-11 col-md-4 imgCol">
+                        <img src="{{int.cover_img.url}}" class="letIntImg">
+                    </div>
+                    <div class="col-11 col-md-7 descCol">
+                        <h4 class="intTitle">{{int.name}}</h4>
+                        <div class="row justify-content-around text-left info3">
+                            <div class="col-4">
+                                <span class="text-muted anInfo d-flex"><i class="fa fa-th-large align-top" aria-hidden="true"></i> {{int.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="text-muted anInfo d-flex"><i class="fa fa-thumb-tack align-top" aria-hidden="true"></i> {{int.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="text-muted anInfo d-flex"><i class="fa fa-hourglass align-top" aria-hidden="true"></i> {{int.time_frame}}</span>
+                            </div>
+                        </div>
+                        <p class="text-left descText">{{int.description|slice:":190"}} ...</p>
+                    </div>
+                    <div class="col-11 col-md-1 gobuttonCol buttonCol">
+                        <button class="btn goButton">
+                            <a href="{% url 'detay' int.id %}" class="goButtonLink">
+                                <div class="goButtonDiv">
+                                    <i class="fa fa-angle-double-right" id="goArrow" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        {%endfor %}
+
+</div>
 
 
 
 {% endblock %}
 
 {% block script %}
+<script type="text/javascript">
+    $(function(){
 
+        var butCount=$("#buttonLine1 .letterButton").length,
+            widthPercent=100/butCount+2+"%";
+        $("#buttonLine1 .letterButton").each(function(i){
+            $(this).css("width",widthPercent);
+        });
+
+        var butCount=$("#buttonLine2 .letterButton").length,
+            widthPercent=100/butCount+1+"%";
+        $("#buttonLine2 .letterButton").each(function(i){
+            $(this).css("width",widthPercent);
+        });
+
+        $(".letterButton").hover(function(){
+            $(this).find(".buttonText").css("border-color","white");
+        }, function (){
+            $(this).find(".buttonText").css("border-color","var(--tangerine)");
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    $(function(){
+        $(document).scroll(function () {
+            var title = $("#pageTitle");
+            var fromTop=$(this).scrollTop();
+            if(fromTop<400){
+                let newOpacity=1-(fromTop/200);
+                let newTop= 70 + fromTop/2.2;
+                title.css("opacity",newOpacity)
+                     .css("top",newTop);
+            }
+
+            var is_search_fixed=$("#searchBoxSection").hasClass("fixed-top");
+            if(fromTop>300 && !is_search_fixed){
+                $("#searchBoxSection").addClass("fixed-top");
+                $("#searchPlaceholder").removeClass("d-none");
+            } else if (fromTop<240 && is_search_fixed){
+                $("#searchBoxSection").removeClass("fixed-top");
+                $("#searchPlaceholder").addClass("d-none");
+            }
+        });
+
+
+        function addGradCss(targetObj, fallback, cssString){
+            let mozCss="-moz-"+cssString,
+                webkitCss="-webkit-"+cssString
+
+            var style = [
+                'background: '+fallback,
+                'background: '+mozCss,
+                'background: '+webkitCss,
+                'background: '+cssString
+            ].join(';');
+
+            targetObj.attr('style', style);
+        }
+
+        var fallbacks=["#fc6f6f",
+                       "#7bb3f7",
+                       "#9af779",
+                       "#f7f6d7",
+                       "#ed87e8"],
+            cssStrings=["linear-gradient(45deg, #fc6f6f 0%, #ff0f23 100%)",
+                        "linear-gradient(45deg, #7bb3f7 0%,#0e6bf7 100%)",
+                        "linear-gradient(45deg, #9af779 0%,#1f8403 100%)",
+                        "linear-gradient(45deg, #f7f6d7 0%,#ffff00 100%)",
+                        "linear-gradient(45deg, #ed87e8 0%,#a303a3 100%)"];
+
+        var categories=$(".category");
+        categories.each(function (index){
+            if(index<5){
+                addGradCss($(this),fallbacks[index],cssStrings[index]);
+            } else {
+                let i=index%5;
+                addGradCss($(this),fallbacks[i],cssStrings[i]);
+            }
+            let randNum=(Math.random()*3).toString()+"s";
+            $(this).css({"animation-name":"floating",
+                         "animation-duration":"4s",
+                         "animation-iteration-count":"infinite",
+                         "animation-timing-function":"ease-in-out",
+                         "animation-delay":randNum});
+            let delay=index*200;
+            $(this).attr("data-aos-delay",delay);
+        });
+        categories.hover(function(){
+            $(this).css("animation-name","none");
+            if($(this).find(".catName").height()>60){
+                $(this).find(".catName").stop(true,false).animate({top:"0px"});
+                $(this).find("img").toggleClass("growTall").toggleClass("grow");
+            }else{
+                $(this).find("img").toggleClass("grow");
+                $(this).find(".catName").stop(true,false).animate({top:"25px"});
+            }
+        },function(){
+            if($(this).find("img").hasClass("growTall")){
+                $(this).find("img").removeClass("growTall");
+            }
+            $(this).css({"animation-name":"floating"});
+            $(this).find("img").toggleClass("grow");
+            $(this).find(".catName").stop(true,false).animate({top:"50px"});
+        });
+
+        var toggler=true;
+        $("#moreButton").click(function(){
+            var categoryView=$("#forCoolBorder");
+            if(toggler){
+                var newHeight=(categoryView.css("height","auto").height()+90)+"px";
+                categoryView.css("height","430px").animate({height:newHeight});
+                $("#circleChevron").toggleClass("rotatable");
+                toggler=false;
+            } else {
+                categoryView.animate({height:"430px"});
+                $("#circleChevron").toggleClass("rotatable");
+                toggler=true;
+            }
+        });
+
+
+        var toScroll=$("#scrollingCards"),
+            scrollableJq=$("#topIntsContainer");
+        $("#scrollTopIntsRight").click( function (){
+            scrollableJq.css("overflow","scroll");
+            let widthToScroll=toScroll.width();
+            scrollableJq.animate({scrollLeft:"+="+widthToScroll},800);
+            scrollableJq.css("overflow","hidden");
+        });
+        $("#scrollTopIntsLeft").click( function (){
+            scrollableJq.css("overflow","scroll");
+            let widthToScroll=toScroll.width();
+            scrollableJq.animate({scrollLeft:"-="+widthToScroll},800);
+            scrollableJq.css("overflow","hidden");
+        });
+
+        $(".descText").each(function(){
+            let current=$(this).html();
+            let newText=current.replace(/;st;/g,"<strong>").replace(/;st.;/g,"</strong>").replace(/;br;/g," ");
+            $(this).html(newText);
+        });
+    });
+</script>
 {% endblock %}

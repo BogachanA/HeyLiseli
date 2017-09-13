@@ -1,52 +1,296 @@
-
 {% extends 'base.html' %}
+{% load compress %}
+{% load staticfiles %}
 
+
+{% block head %}
+<title>Hey Liseli - Kayıt Ol</title>
+{% compress css %}
+<link rel="stylesheet" href="{% static 'base/css/registration.css' %}">
+{% endcompress %}
+{% endblock %}
 
 {% block body %}
-  <div class="col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-2 loginbox">
-    <div class="panel panel-info">
-	    <div class="panel-heading">
-		     <div class="panel-title">Create a Mystery Books Account</div>
-		</div>
-		<div class="panel-body">
-		  <form method="post" action="." class="form-horizontal" >
-		   {% csrf_token %}
-		   <div id="signupalert" style="display:none" class="alert alert-danger">
-		     <p> Error:</p>
-			 <span></span>
-		   </div>
-		   <div class="form-group">
-		     <label for="id_username" class="col-md-3 control-label">Username</label>
-			 <div class="col-md-6">
-			   <input id="id_username" type="text" class="form-control" name="username" placeholder="Username">
-			 </div>
-		   </div>
-		   <div class="form-group">
-		     <label for="id_email" class="col-md-3 control-label">Email</label>
-			 <div class="col-md-6">
-			   <input id="id_email" type="text" class="form-control" name="email" placeholder="Email Address">
-			 </div>
-		   </div>
-		   <div class="form-group">
-		     <label for="id_password1" class="col-md-3 control-label">Password</label>
-			 <div class="col-md-6">
-			   <input id="id_password1" type="password" class="form-control" name="password1" placeholder="Password">
-			 </div>
-		   </div>
-		   <div class="form-group">
-		     <label for="id_password2" class="col-md-3 control-label">Confirm Password</label>
-			 <div class="col-md-6">
-			   <input id="id_password2" type="password" class="form-control" name="password2" placeholder="Confirm Password">
-			 </div>
-		   </div>
-		   <div class="form-group">
-		     <div class="col-md-offset-3 col-md-9">
-			  <button id="btn-signup" type="submit" class="btn btn-info"><i class="icon-hand-right"></i>Register</button>
-			 </div>
-		   </div>
-		 </form>
-		</div>
-	</div>
-  </div>
+  <div id="mainView">
+    <div class="paraxify" id="bg-image">
+        <div class="container-fluid" id="registercontainer">
+            <div class="row justify-content-sm-center">
+                <div class="col-md-7" id="registerBox">
+                    <div id="registerHead" class="w-100 text-center">
+                        <h1 class="text-center">Kayıt Ol</h1>
+                    </div>
+                    <div class="w-100 text-center" id="registerBody">
 
-{% endblock %} 
+                        <i class="fa fa-graduation-cap fa-5x" aria-hidden="true" id="cap"></i>
+
+                        <div class="{% if not form.errors %} d-none {% endif %}" id="errors">
+                            <div id="errorTitle">
+                                <h4>Devam Etmeden Önce...</h4>
+                            </div>
+                            <span id="errorTexts">{{form.errors}}</span>
+                        </div>
+                        <form method="post" action=".">
+                            {% csrf_token %}
+                            {{ form.name }}
+                            {{form.surname}}<br>
+                            <a tabindex="-1" class="" role="button" data-toggle="popover"
+                               data-placement="top" data-trigger="focus"
+                               title="Kullanıcı adın"
+                               data-content="Kullanıcı adın seni ifade etmeli liseli.
+                               Ha bide 6 veya daha fazla karakterden oluşmalı ve boşluk içeremez.
+                               İçerebileceği özel karakterler: @, -, _ ve . ">
+                                {{form.username}}
+                            </a>
+                            <a tabindex="-1" class="" role="button" data-toggle="popover"
+                               data-placement="top" data-trigger="focus"
+                               title="Mail Adresin"
+                               data-content="Yoğun öğrenci hayatı seni adeta bir robota çevirdi, biliyoruz.
+                               Robottan tek farkın bir mail adresinin olması. Robot olmadığını kanıtla.
+                               Geçerli bir mail adresi gir!">
+                                {{form.email}}
+                            </a><br>
+                            <a tabindex="-1" class="" role="button" data-toggle="popover"
+                               data-placement="top" data-trigger="focus"
+                               title="Şifren"
+                               data-content="En az 6 karakterlik bir şifre seç,
+                               Düzgün bir şifre koy. Sonra ikide bir unuttum diye bana gelme. Ayrıca
+                               içerebileceği özel karakterler: !, @, -, _, *, '.' ve ',' ">
+                                {{form.password1}}
+                            </a>
+                            <a tabindex="-1" class="" role="button" data-toggle="popover"
+                               data-placement="top" data-trigger="focus"
+                               title="Yine şifre, yeniden şifre, bir daha şifre."
+                               data-content="Wow, adamım! Yandakinin aynısını yazman gerekiyor.
+                               Zor bişey değil. Hadi kaplan.">
+                                {{form.password2}}
+                            </a><br>
+                            <a tabindex="-1" class="" role="button" data-toggle="popover"
+                               data-placement="top" data-trigger="focus"
+                               title="Sınıfını Seç"
+                               data-content="Sen sormadan söyleyeyim,
+                               eğer yaz tatilindeysen geçtiğin değil bitirdiğin sınıfı seç.
+                               Lise bittiyse dert değil. Üniversiteli de olsan, kim olursan ol yine üye ol.">
+                                <i class="pe pe-7s-angle-down fa-2x pull-right openDown"></i>
+                            {{form.grade}}
+                            </a>
+                            <a tabindex="-1" class="" role="button" data-toggle="popover"
+                               data-placement="top" data-trigger="focus"
+                               title="Okuduğun okul"
+                               data-content="Zahmet olmayacaksa aşağıdaki listeden okulunun adını seç.
+                               Listede bulamadıysan '--Okul Seç--' seçeneğinde bırak ve aşağıda çıkan
+                               kutucuğa okulunun tam adını yaz.">
+                                <i class="pe pe-7s-angle-down fa-2x pull-right openDown"></i>
+                                {{form.lise}}</a><br><br>
+                            {{form.newSchool}}
+                            <button class="hoverButtons" type="submit" id="submitbutton">Kayıt Ol</button>
+                            <input type="hidden" name="next" value="{{next}}">
+                        </form>
+                        <div class='middleLine'></div><br>
+                        <a href="{% url 'custom_login' %}"><button class="hoverButtons" id="loginbutton">Zaten Üye Misin? Giriş Yap</button> </a>
+                        <hr style="background-color:rgba(241,159,77,0.6)">
+                        <a href="{% url 'social:begin' 'twitter' %}">
+                            <div class="socialButtons hoverButtons" id="twitterLogin">
+                                <p class="socialLoginText"><i class="fa fa-twitter fa-2x align-middle" aria-hidden="true" style="color:white; margin-right:10px;"></i> Twitter ile Giriş Yap</p>
+                            </div>
+                        </a>
+                        <a href="{% url 'social:begin' 'facebook' %}">
+                            <div class="socialButtons hoverButtons" id="facebookLogin">
+                                <p class="socialLoginText"><i class="fa fa-facebook fa-2x align-middle" aria-hidden="true" style="color:white;margin-right:10px;"></i> Facebook ile Giriş Yap</p>
+                            </div>
+                        </a>
+                        <a href="{% url 'social:begin' 'google-oauth2' %}">
+                            <div class="socialButtons hoverButtons" id="googleLogin">
+                                <p class="socialLoginText" ><i class="fa fa-google fa-2x align-middle" aria-hidden="true" style="color:white;margin-right:10px;"></i> Google ile Giriş Yap</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        $('[data-toggle="popover"]').popover()
+
+        $("#registercontainer input").focusin(function(){
+            $(this).animate({backgroundColor:"rgba(255,255,255,0.2)",borderBottomStyle:"solid",borderBottomColor:"white"},1000);
+        });
+        $("#registercontainer input").focusout(function(){
+            $(this).animate({backgroundColor:"transparent"});
+            if($(this).val()==""){
+                $(this).animate({borderBottomColor:"transparent"});
+            }
+        });
+
+        $("select")[0].setAttribute("required","true");
+
+        var errorText=$("#errors").html();
+        errorText=errorText.replace("username","<div class='middleLine'></div>");
+        errorText=errorText.replace("password1","<div class='middleLine'></div>");
+        errorText=errorText.replace("password2","<div class='middleLine'></div>");
+        errorText=errorText.replace("email","<div class='middleLine'></div>");
+        errorText=errorText.replace("grade","<div class='middleLine'></div>");
+        errorText=errorText.replace("school","<div class='middleLine'></div>");
+        errorText=errorText.replace("newSchool","<div class='middleLine'></div>");
+        $("#errors").html(errorText);
+
+
+        // Form fields dynamic validation
+        var usernameOK=false,
+            passOK=false,
+            pass2OK=false,
+            emailOK=false,
+            gradeOK=false,
+            schoolOK=false,
+            newschoolOK=false;
+
+        const userRegex=/^[a-zA-ZığüşöçĞÜŞÖÇİ@\-_\.0-9]{6,}$/,
+              emailRegex=/^[a-zA-ZığüşöçĞÜŞÖÇİ\-_\.0-9]+@[\wığüşöçĞÜŞÖÇİ]+\.[\wığüşöçĞÜŞÖÇİ\.]+$/,
+              passRegex=/^[\wığüşöçĞÜŞÖÇİ!\.\,*\-_@]{6,}$/,
+              newschoolRegex=/^[a-zA-ZığüşöçĞÜŞÖÇİ ]{4,}$/;
+
+
+        $("#nameInput").on("input",function(){
+            $(this).addClass("isValid");
+        });
+        $("#surnameInput").on("input",function(){
+            $(this).addClass("isValid");
+        });
+        $("#userInput").on('input',function(){
+            let currentValue=$(this).val();
+            if (userRegex.test(currentValue)){
+                $(this).addClass("isValid");
+                $(this).removeClass("notValid");
+                usernameOK=true;
+            } else {
+                $(this).removeClass("isValid");
+                $(this).addClass("notValid");
+                usernameOK=false;
+            }
+        });
+        $("#emailInput").on('input',function(){
+            let currentValue=$(this).val();
+            if (emailRegex.test(currentValue)){
+                $(this).addClass("isValid");
+                $(this).removeClass("notValid");
+                emailOK=true;
+            } else {
+                $(this).removeClass("isValid");
+                $(this).addClass("notValid");
+                emailOK=false;
+            }
+        });
+        $("#passInput").on('input',function(){
+            let currentValue=$(this).val();
+            if (passRegex.test(currentValue)){
+                $(this).addClass("isValid");
+                $(this).removeClass("notValid");
+                passOK=true;
+            } else {
+                $(this).removeClass("isValid");
+                $(this).addClass("notValid");
+                passOK=false;
+            }
+        });
+        $("#rePassInput").on('input',function(){
+            let currentValue=$(this).val();
+            if (currentValue==$("#passInput").val()){
+                $(this).addClass("isValid");
+                $(this).removeClass("notValid");
+                pass2OK=true;
+            } else {
+                $(this).removeClass("isValid");
+                $(this).addClass("notValid");
+                pass2OK=false;
+            }
+        });
+        $("#id_grade").change(function(){
+            if($(this).find(":selected").text() == "---Sınıfını Seç---"){
+                $(this).animate({borderColor:"red",borderWidth:"3px"});
+                gradeOK=false
+            } else {
+                $(this).animate({borderColor:"rgba(60, 179, 113,0.5)",borderWidth:"3px"});
+                gradeOK=true;
+            }
+        });
+
+        function hiddenNewSchool(){
+            if($("#schoolSelect").find(":selected").text() == "--Okulunu Seç--"){
+                $("#newSchoolInput").removeClass("d-none").attr("required","true");
+                schoolOK=false;
+            } else {
+                $("#newSchoolInput").addClass("d-none").removeAttr("required");
+                schoolOK=true;
+                newschoolOK=true;
+            }
+        }
+        hiddenNewSchool();
+        $("#schoolSelect").removeAttr("required");
+        $("#schoolSelect").change(function(){
+            hiddenNewSchool()
+        });
+
+        $("#newSchoolInput").on('input',function(){
+            let currentValue=$(this).val();
+            if (newschoolRegex.test(currentValue)){
+                $(this).addClass("isValid");
+                $(this).removeClass("notValid");
+                newschoolOK=true;
+                schoolOK=true;
+            } else {
+                $(this).removeClass("isValid");
+                $(this).addClass("notValid");
+                newschoolOK=false;
+                schoolOK=false;
+            }
+        });
+
+        if("{{request.method}}"=="POST"){
+            $(".inputField").each(function(){
+                $(this).trigger("input");
+            });
+            $("select").each(function(){
+                $(this).trigger("change");
+            });
+        }
+
+        $("form").submit(function(e){
+            var errorMessage="";
+            if(!usernameOK){
+                errorMessage+="<li>Kullanıcı adın hatalı liseli. En az 6 karakterden oluştuğundan emin ol. İçerebileceği özel karakterler: @, -, _ ve .</li>";
+            }
+            if(!passOK){
+                errorMessage+="<li>Meh, bu şifreyi beğenmedim. Şaka şaka. Sadece en az 6 karakterden oluştuğundan emin ol. İçerebileceği özel karakterler: !, @, -, _, *, '.' ve ','</li>";
+            }
+            if(!pass2OK){
+                errorMessage+="<li>İki şifrenin birbirini tutmadığının farkında mısın? Tabiki değilsin. Aynı şifreyi tekrar girdiğinden emin ol. Hadi koçum/keçim (sakin olun feministler).</li>";
+            }
+            if(!emailOK){
+                errorMessage+="<li>Mail adresinde bir sorun var. İşine karışmak gibi olmasın ama, doğru girdiğine emin misin?</li>";
+            }
+            if(!gradeOK){
+                errorMessage+="<li>Sınıfını seçmeyi unuttun. Dalgınlığın üzerinde bakıyorum.</li>";
+            }
+            if(!schoolOK || !newschoolOK){
+                errorMessage+="<li>Dostum! Ya listeden bir okul seç, ya da bulamadıysan listenin altındaki kutucuğa okulunun adını yaz.</li>";
+            }
+
+            if(!errorMessage==""){
+                e.preventDefault();
+                $("#errorTexts").html(errorMessage);
+                $("#errors").removeClass("d-none");
+            }
+
+
+        });
+
+        $("#nameInput").focus();
+    });
+</script>
+{% endblock %}

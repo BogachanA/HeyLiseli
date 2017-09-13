@@ -22,10 +22,9 @@
                     <div class="w-100 text-center" id="loginBody">
 
                         <i class="fa fa-graduation-cap fa-5x" aria-hidden="true" id="cap"></i>
-                        <form method="post" action=".">
+                        <form method="post" action="{% url 'custom_login' %}">
                             {% csrf_token %}
-                            <input type="text" name="username" placeholder="Kullanıcı Adın"><br>
-                            <input type="password" name="password" placeholder="Şifren"><br>
+                            {{ form.as_p }}
 
                             <!-- TODO insert a remember me button (functional) -->
                             <button class="hoverButtons" type="submit" id="submitbutton">Giriş Yap</button>

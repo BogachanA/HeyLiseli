@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load compress %}
+
+{% block head %}
+<title>Bi de Şunları Dolduruver</title>
+{% compress css %}
+<link rel="stylesheet" href="{% static 'base/css/register_pages.css' %}">
+<link rel="stylesheet" href="{% static 'base/css/social_extras.css' %}">
+{% endcompress %}
+{% endblock %}
+
+{% block body %}
+<div id="mainView">
+    <div class="paraxify" id="bg-image">
+        <div class="container-fluid" id="registercontainer">
+            <div class="row justify-content-sm-center">
+                <div class="col-md-8" id="registerBox">
+                    <div id="registerHead" class="w-100 text-center">
+						<img class="float-none float-md-left" src="{% static 'base/img/heyliseli_logo2.png' %}" id="logoBound">
+                        <h1 class="text-center text-md-left">Sadece Birkaç Soru! </h1>
+                    </div>
+                    <div class="w-100" id="registerBody">
+						<div class="row justify-content-center">
+							<div class="col-md-10" id="welcomeAndErrors">
+								<h6 id="bodyText">
+									HeyLiseli'ye hoşgeldin Liseli, <br>
+									Yeni bir kullanıcı olduğun için kaydını aktifleştirmeden önce sana birkaç ufak sorumuz olacak.<br>
+									Merak etme, sorular cevaplarını bildiğin tarzda. <br> Seni aramıza almak için sabırsızlanıyoruz.
+								</h6>
+                                <div class="{% if not form.errors %}d-none {% endif %}" id="errors">
+                                    <div id="errorTitle">
+                                        <h4>Devam Etmeden Önce...</h4>
+                                    </div>
+                                    <span id="errorTexts">{{form.errors}}</span>
+                                </div>
+							</div>
+							<div class="col-11 col-md-12">
+                                <form method="post" action="{% url 'social_extra' %}">
+                                    {% csrf_token %}
+                                    <a tabindex="-1" class="" role="button" data-toggle="popover"
+                                   data-placement="top" data-trigger="focus"
+                                   title="Mail Adresin"
+                                   data-content="Yoğun öğrenci hayatı seni adeta bir robota çevirdi, biliyoruz.
+                                   Robottan tek farkın bir mail adresinin olması. Robot olmadığını kanıtla.
+                                   Geçerli bir mail adresi gir!">
+                                    {{form.email}}
+                                    </a>
+                                    <a tabindex="-1" class="" role="button" data-toggle="popover"
+                                       data-placement="top" data-trigger="focus"
+                                       title="Sınıfını Seç"
+                                       data-content="Sen sormadan söyleyeyim,
+                                       eğer yaz tatilindeysen geçtiğin değil bitirdiğin sınıfı seç.
+                                       Lise bittiyse dert değil. Üniversiteli de olsan, kim olursan ol yine üye ol.">
+                                        <i class="pe pe-7s-angle-down fa-2x pull-right openDown"></i>
+                                        {{form.grade}}
+                                    </a>
+                                    <br>
+                                    <a tabindex="-1" id="schoolPop" class="" role="button" data-toggle="popover"
+                                   data-placement="top" data-trigger="focus"
+                                   title="Okuduğun okul"
+                                   data-content="Zahmet olmayacaksa aşağıdaki listeden okulunun adını seç.
+                                   Listede bulamadıysan '--Okul Seç--' seçeneğinde bırak ve aşağıda çıkan
+                                   kutucuğa okulunun tam adını yaz.">
+                                        <i class="pe pe-7s-angle-down fa-2x pull-right openDown"></i>
+                                    {{form.lise}}</a>{{form.newSchool}}
+                                    <button class="hoverButtons" type="submit" id="submitExtras">Kaydet</button>
+                                    <input type="hidden" name="next" value="{{next}}">
+                                </form>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        $('[data-toggle="popover"]').popover()
+
+        $(".extraInput").focusin(function(){
+            $(this).animate({backgroundColor:"rgba(255,255,255,0.2)",borderBottomStyle:"solid",borderBottomColor:"white"},1000);
+        });
+        $(".extraInput").focusout(function(){
+            $(this).animate({backgroundColor:"transparent"});
+            if($(this).val()==""){
+                $(this).animate({borderBottomColor:"transparent"});
+            }
+        });
+
+        var errorText=$("#errors").html();
+        errorText=errorText.replace("email","<div class='middleLine'></div>");
+        errorText=errorText.replace("grade","<div class='middleLine'></div>");
+        errorText=errorText.replace("school","<div class='middleLine'></div>");
+        errorText=errorText.replace("newSchool","<div class='middleLine'></div>");
+        $("#errors").html(errorText);
+
+        function changeHeightForErrors(){
+            if(!$("#errors").hasClass("d-none")){
+                $("#bg-image").css("height","1000px");
+            }
+        }
+        changeHeightForErrors();
+
+        // Form fields dynamic validation
+        var emailOK=false,
+            gradeOK=false,
+            schoolOK=false,
+            newschoolOK=false;
+
+        const emailRegex=/^[a-zA-ZığüşöçĞÜŞÖÇİ\-_\.0-9]+@[\wığüşöçĞÜŞÖÇİ]+\.[\wığüşöçĞÜŞÖÇİ\.]+$/,
+              newschoolRegex=/^[a-zA-ZığüşöçĞÜŞÖÇİ ]{4,}$/;
+
+        function checkInputRegex(inputElement,regex){
+            let currentValue=inputElement.val();
+            if (regex.test(currentValue)){
+                inputElement.addClass("isValid").removeClass("notValid");
+                return true;
+            } else {
+                inputElement.removeClass("isValid").addClass("notValid");
+                checkBoolean=false;
+                return false;
+            }
+        }
+
+        $("#extraEmail").on('input',function(){
+            emailOK=checkInputRegex($(this),emailRegex);
+        });
+
+        $("#newSchoolInput").on('input',function(){
+            newschoolOK=checkInputRegex($(this),newschoolRegex);
+            schoolOK=newschoolOK;
+        });
+
+        $("#gradeSelect").change(function(){
+            if($(this).find(":selected").text() == "---Sınıfını Seç---"){
+                $(this).animate({borderColor:"red",borderWidth:"3px"});
+                gradeOK=false
+            } else {
+                $(this).animate({borderColor:"rgba(60, 179, 113,0.5)",borderWidth:"3px"});
+                gradeOK=true;
+            }
+        });
+        function hiddenNewSchool(){
+            if($("#schoolSelect").find(":selected").text() == "--Okulunu Seç--"){
+                $("#newSchoolInput").removeClass("d-none").attr("required","true");
+                $("#schoolPop").css("position","relative").animate({"left":"0%"}).find(".openDown").removeClass("d-none");
+                schoolOK=false;
+            } else {
+                $("#newSchoolInput").addClass("d-none").removeAttr("required");
+                $("#schoolPop").css("position","relative").animate({"left":"30%"}).find(".openDown").addClass("d-none");
+                schoolOK=true;
+                newschoolOK=true;
+            }
+        }
+        hiddenNewSchool();
+        $("#schoolSelect").removeAttr("required");
+        $("#schoolSelect").change(function(){
+            hiddenNewSchool();
+        });
+
+        if("{{request.method}}"=="POST"){
+            $(".extraInput").each(function(){
+                $(this).trigger("input");
+            });
+            $("select").each(function(){
+                $(this).trigger("change");
+            });
+        }
+
+        $("form").submit(function(e){
+            var errorMessage="";
+            if(!emailOK){
+                errorMessage+="<li>Mail adresinde bir sorun var. İşine karışmak gibi olmasın ama, doğru girdiğine emin misin?</li>";
+            }
+            if(!gradeOK){
+                errorMessage+="<li>Sınıfını seçmeyi unuttun. Dalgınlığın üzerinde bakıyorum.</li>";
+            }
+            if(!schoolOK || !newschoolOK){
+                errorMessage+="<li>Dostum! Ya listeden bir okul seç, ya da bulamadıysan listenin altındaki kutucuğa okulunun adını yaz.</li>";
+            }
+
+            if(!errorMessage==""){
+                e.preventDefault();
+                $("#errorTexts").html(errorMessage);
+                $("#errors").removeClass("d-none");
+                changeHeightForErrors();
+            }
+
+        });
+    });
+</script>
+{% endblock %}

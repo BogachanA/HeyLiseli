@@ -14,3 +14,23 @@ def substring(value,arguments):
 @register.filter(name='len',is_safe=True)
 def getLength(value):
     return len(value)
+
+@register.filter(name='add_',is_safe=True)
+def update_value(var,toAdd):
+    var+=toAdd
+    return var
+
+@register.filter(name='_add',is_safe=True)
+def update_value(var,toAdd):
+    var=toAdd+var
+    return var
+
+@register.filter(name='tostr',is_safe=True)
+def tostring(value):
+    return str(value)
+
+@register.filter(name='div',is_safe=True)
+def divide(value,arg):
+    arg=int(arg)
+    return value/arg
+

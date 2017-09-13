@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'social_django',
     'catalog',
     'registration',
-
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware', #Debug toolbar
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -144,9 +145,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL="/media/"
 
 #Registration settings:
-ACCOUNT_ACTIVATION_DAYS=5
+ACCOUNT_ACTIVATION_DAYS=8
 REGISTRATION_AUTO_LOGIN=True
 LOGIN_REDIRECT_URL="/"
+REGISTRATION_FORM="catalog.forms.registerForm"
+REGISTRATION_EMAIL_HTML=True
 
 
 #Email
@@ -168,6 +171,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/accounts/social-registry/'
+
 #Twitter auth
 SOCIAL_AUTH_TWITTER_KEY = '0HhwSzB6sdy1dvuwIMaYomWcV'
 SOCIAL_AUTH_TWITTER_SECRET = 'QsyhkMPCLK0YFaWWUiUoSSy0ifRJtR5byW6zC0jKrkkkTKrTNR'
@@ -183,3 +188,9 @@ SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = [
     'https://www.googleapis.com/auth/plus.login',
     'https://www.googleapis.com/auth/userinfo.email',
 ]
+
+#Session settings
+SESSION_SAVE_EVERY_REQUEST = True
+
+#Django Debug Toolbar
+INTERNAL_IPS = ('127.0.0.1',)

@@ -1,17 +1,45 @@
 {% extends 'base.html' %}
+{% load compress %}
+{% load staticfiles %}
+
+{% block head %}
+<title>Kayıt Başarılı, Mailine Bak</title>
+{% compress css %}
+<link rel="stylesheet" href="{% static 'base/css/register_pages.css' %}">
+{% endcompress %}
+{% endblock %}
 
 {% block body %}
-    <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 loginbox">
-        <div class="panel panel-info">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    Hesabın aktifleştirildi.
+ <div id="mainView">
+    <div class="paraxify" id="bg-image">
+        <div class="container-fluid" id="registercontainer">
+            <div class="row justify-content-sm-center">
+                <div class="col-md-8" id="registerBox">
+                    <div id="registerHead" class="w-100 text-center">
+						<img class="float-none float-md-left" src="{% static 'base/img/heyliseli_logo2.png' %}" id="logoBound">
+                        <h1 class="text-center text-md-left">Aktivasyonu Tamamladın! </h1>
+                    </div>
+                    <div class="w-100" id="registerBody">
+						<div class="row justify-content-center">
+							<div class="col-md-8">
+								<h6 id="bodyText">
+									Her şey tamam! <br>
+									Hesabın artık aktif liseli. <br><br>
+									Şimdi HeyLiseli'nin bütün fırsatlarından sınırsızca yararlanabilirsin.<br>
+									Burada olman bir harika. Sana her konuda yardımcı olabilmek için sabırsızlanıyoruz.<br><br>
+									Haydi durma, <br>
+                                    İstediğin her şey parmağının ucunda...
+								</h6>
+							</div>
+							<div class="col-4 col-md-4">
+								<i class="fa fa fa-child" id="cardIcon" aria-hidden="true"></i>
+							</div>
+						</div>
+                    </div>
                 </div>
-            </div>
-            <div style="padding-top:30px" class="panel-body">
-                    Hesabın artık aktif!
-                    Yolculuğa hazır mısın, liseli?
             </div>
         </div>
     </div>
+
+</div>
 {% endblock %}

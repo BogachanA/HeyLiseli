@@ -241,6 +241,17 @@
 .statRow{
     height: 200px;
 }
+#viewCountDisplay{
+    float: right;
+    font-size: 15px;
+    color: darkgray;
+    margin-right: 20px;
+}
+#eye{
+    font-size: 25px;
+}
+
+
 
 
 @media(max-width: 991px) {

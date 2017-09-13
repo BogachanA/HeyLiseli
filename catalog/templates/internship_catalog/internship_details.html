@@ -46,12 +46,12 @@
                 <div class="modernTitle">
                     <h3>Staj Açıklaması</h3>
                 </div>
-                <p id="intDescriptionText" class="text-sm-left text-secondary">{{internship.description}}</p>
+                <p id="intDescriptionText" class="text-sm-left text-secondary strongbreak">{{internship.description}}</p>
                 <hr>
                 <div class="modernTitle modernTitle2">
                     <h3 id="modTit2">Sorumluluklar / Gereklilikler</h3>
                 </div>
-                <p id="intRequirementText" class="text-right text-secondary">{{internship.requirements}}</p>
+                <p id="intRequirementText" class="text-right text-secondary strongbreak splitList">{{internship.requirements}}</p>
             </div>
             <hr>
             <div class="detailSection" id="intStats">
@@ -101,7 +101,7 @@
                             <div class="toggleTitles">
                                 <p class="statName">Yayın Tarihi</p>
                             </div>
-                            <p class="statExp" id="publishDateInfo">{{internship.date_published}}</p>
+                            <p class="statExp translateMonth" id="publishDateInfo">{{internship.date_published}}</p>
 
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                             <div class="toggleTitles">
                                 <p class="statName">Son Başvuru</p>
                             </div>
-                            <p class="statExp" id="deadlineInfo">{{internship.deadline}}</p>
+                            <p class="statExp translateMonth" id="deadlineInfo">{{internship.deadline}}</p>
 
                         </div>
                     </div>
@@ -131,6 +131,13 @@
                     </div>
                 </div>
             </div>
+            <hr>
+            <div class="section" id="viewCountSection">
+                <div id="viewCountDisplay">
+                    <i class="fa fa-eye align-middle" aria-hidden="true" id="eye"></i>
+                    <span class="align-middle" id="viewCount"> {{view_count}} Kez Görüntülendi</span>
+                </div>
+            </div>
         </div>
         <div class="col-md-4 detailPanel" id="similarInternships">
 
@@ -143,23 +150,17 @@
 
 <script type="text/javascript">
     $(function(){
+        modifyPlainText();
         var initialBriefText=$("#company_desc").html();
-        var briefText=$("#company_desc").html().substr(0,50)+" ...";
-        var briefText=briefText.replace(/;st;/g,""),
-            briefText=briefText.replace(/;st.;/g,""),
-            briefText=briefText.replace(/;br;/g,"");
+        var briefText=$("#company_desc").html().substr(0,100)+" ...";
+        var briefText=briefText.replace(/;st;/g,"").replace(/;st.;/g,"").replace(/;br;/g,"");
         $("#company_desc").html(briefText);
-
-        editedBriefText=initialBriefText.replace(/;st;/g,"<strong>");
-        editedBriefText=editedBriefText.replace(/;st.;/g,"</strong>");
-        editedBriefText=editedBriefText.replace(/;br;/g,"<br>");
-        editedBriefText=editedBriefText.replace(/--/g,"<br>-");
-        editedBriefText="<br>"+editedBriefText;
 
         var toggler=true;
         $("#companyBriefInfo").click(function(){
             if(toggler==true){
-                $("#company_desc").html(editedBriefText);
+                $("#company_desc").html("<br>"+initialBriefText).addClass("strongbreak");
+                modifyPlainText();
                 var newHeight=($(this).css("height","auto").height()+70)+"px";
 
                 $(this).css("height","85px");
@@ -174,92 +175,16 @@
                 $("#chevDown").removeClass("rotateable");
                 setTimeout(function(){
                     $("#toCompanyPage").toggle();
-                    $("#company_desc").html(briefText);
+                    $("#company_desc").removeClass("strongbreak").html(briefText);
                 },400);
                 toggler=true;
             }
         });
 
 
-        function splitIntoList(textToSplit){
-
-            var sentences=textToSplit.split(".");
-            var finalStringHTML="";
-            for (var sent of sentences){
-                var newSent=sent.replace("-","");
-                finalStringHTML+=newSent+" <i class='fa fa-check-circle' style='color:var(--sblue);' aria-hidden='true'></i><br>";
-            }
-            finalStringHTML=finalStringHTML.substr(0,finalStringHTML.length-86);
-
-            return finalStringHTML;
-        }
-
-        var splitIt=$("#intRequirementText").html(),
-            splitIt=splitIt.replace(/;br;/g,"<br>"),
-            splitIt=splitIt.replace(/;st;/g,"<strong>"),
-            splitIt=splitIt.replace(/;st.;/g,"</strong>"),
-            newHTML=splitIntoList(splitIt);
-        $("#intRequirementText").html(newHTML);
         $("#intRequirementText").find("strong").css("font-weight","bold")
                                                .css("font-size","140%")
                                                .css("font-family","'Jockey One', sans-serif");
-        var currDesc=$("#intDescriptionText").html(),
-            currDesc=currDesc.replace(/;st;/g,"<strong>"),
-            currDesc=currDesc.replace(/;st.;/g,"</strong>"),
-            newDesc=currDesc.replace(/;br;/g,"<br>");
-        $("#intDescriptionText").html(newDesc);
-
-
-
-        function translateMonth(dateAsHTML){
-            var splitted=dateAsHTML.split(" ");
-            var translated="";
-            switch(splitted[0]){
-                case "Jan.":
-                    translated="Ocak";
-                    break;
-                case "Feb.":
-                    translated="Şubat";
-                    break;
-                case "March":
-                    translated="Mart";
-                    break;
-                case "April":
-                    translated="Nisan";
-                    break;
-                case "May":
-                    translated="Mayıs";
-                    break;
-                case "June":
-                    translated="Haziran";
-                    break;
-                case "July":
-                    translated="Temmuz";
-                    break;
-                case "Aug.":
-                    translated="Ağustos";
-                    break;
-                case "Sept.":
-                    translated="Eylül";
-                    break;
-                case "Oct.":
-                    translated="Ekim";
-                    break;
-                case "Nov.":
-                    translated="Kasım";
-                    break;
-                case "Dec.":
-                    translated="Aralık";
-                    break;
-            }
-            return translated+" "+splitted[1]+" "+splitted[2];
-        }
-
-        var publishDateTranslate=$("#publishDateInfo").html();
-        $("#publishDateInfo").html(translateMonth(publishDateTranslate));
-
-        var deadlineTranslate=$("#deadlineInfo").html();
-        $("#deadlineInfo").html(translateMonth(deadlineTranslate));
 
 
         $(".toCenter").hover(function(){

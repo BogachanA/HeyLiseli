@@ -1,5 +1,6 @@
 body{
     margin:0;
+    overflow-x: hidden;
 }
 #mainScreen{
     padding: 120px 10px 60px 10px;
@@ -42,6 +43,9 @@ body{
     margin: 25px auto;
     height: 3px;
     background-color: var(--sblue);
+}
+#titleInfo i{
+    font-size: 30px;
 }
 .infoTitle{
     font-family: 'Poiret One', sans-serif;
@@ -117,6 +121,7 @@ body{
 }
 .intImageCol{
     padding: 0 15px;
+    max-height: 220px;
 }
 .intImage{
     width: 100%;
@@ -150,6 +155,7 @@ body{
 @media(max-width: 767px){
     #companyTitle{
         font-size: 28px;
+        margin-top: -20px;
     }
     .hoveringCol{
         padding: 0;
@@ -170,10 +176,13 @@ body{
     .intContainer{
         margin-top: 30px;
     }
+    #titleInfo{
+        font-size: 15px;
+    }
 }
 @media(max-width: 575px){
     #companyTitle{
-        font-size: 25px;
+        font-size: 20px;
         margin-top: -5px;
     }
     #mainScreen hr{
@@ -181,6 +190,7 @@ body{
     }
     #titleInfo i{
         margin: 5px auto;
+        font-size: 20px;
     }
     .infoAnswer{
         font-size: 12px;
@@ -188,4 +198,5 @@ body{
     .intTitle{
         padding-top: 20px;
     }
+    
 }

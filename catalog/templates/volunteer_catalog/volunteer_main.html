@@ -1,0 +1,378 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load compress %}
+{% load customFilters %}
+
+{% block head %}
+<title>Gönüllülük Projeleri</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+{% compress css %}
+<link rel="stylesheet" href="{% static 'base/css/volunteer_main.css' %}">
+{% endcompress %}
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron-fluid section titleSection" id="pageTitleSection">
+    <img id="titleBG" src="{% static 'base/img/volunteerCatalog/help_people.png' %}">
+    <h1 class="paralaxTitle" id="pageTitle">Gönüllülük<br>Programları</h1>
+</div>
+<div class="tilter" id="tilter1"></div>
+<div class="tilter" id="tilter2"></div>
+<div class="coverUp" id="coverUpTilters"></div>
+<div class="section container-fluid" id="categoriesSection">
+    <h2 id="catTitle">Kategoriler</h2>
+    <div class="row justify-content-start" id="hoverableCatContainer">
+        {% for cat in categories %}
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 sphereCol">
+                <a href="" class="toCatSearch">
+                <figure class="ball bubble sphereCat" style="">
+                    <img class="catImage" src="{{cat.icon.url}}">
+                    <h5 class="volCatTitle">{{cat.name}}</h5>
+                </figure></a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="section container-fluid" id="topVolsSection">
+    <h2 class="toptitle"><span class="threedot">. . .</span> <span class="maintoptitle">En Çok Görüntülenen Gönüllü Projeler</span> <span class="threedot">. . .</span></h2>
+    <div class="row justify-content-center" id="topRow">
+        <div class="col-10 col-md-6 volCardContainer" id="topVol1">
+            {% with top=tops.first %}
+            <div class="topVolCard topVolCardHorizontal card1" onclick="goToDetailUrl({{top.id}})">
+                <div class="row rowInsideCard">
+                    <div class="horizontalCardImage col-4">
+                        <img src="{{top.cover_img.url}}" class="cardImg">
+                        <img src="{{top.provider.company_logo.url}}" class="compLogo compLogoHorizontal">
+                    </div>
+                    <div class="cardInfo col-8">
+                        <h3 class="topVolTitle ">{{top.name}}</h3>
+                        <div class="row justify-content-around text-center info3">
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-keypad " aria-hidden="true"></i><br> {{top.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-pin" aria-hidden="true"></i><br> {{top.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-stopwatch" aria-hidden="true"></i><br> {{top.time_frame}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+        </div>
+        <div class="col-5 col-md-4 volCardContainer" id="topVol2">
+            {% with top=tops.1 %}
+            <div class="topVolCard topVolCardVertical card2" onclick="goToDetailUrl({{top.id}})">
+                <div class="row rowInsideCard">
+                    <div class="verticalCardImage col-12">
+                        <img src="{{top.cover_img.url}}" class="cardImg">
+                        <img src="{{top.provider.company_logo.url}}" class="compLogo compLogoVertical">
+                    </div>
+                    <div class="cardInfo col-12">
+                        <h3 class="topVolTitle ">{{top.name}}</h3>
+                        <div class="row justify-content-around text-center info3">
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-keypad " aria-hidden="true"></i><br> {{top.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-pin" aria-hidden="true"></i><br> {{top.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-stopwatch" aria-hidden="true"></i><br> {{top.time_frame}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+        </div>
+        <div class="col-5 col-md-3 volCardContainer" id="topVol3">
+            {% with top=tops.2 %}
+            <div class="topVolCard topVolCardVertical card3" onclick="goToDetailUrl({{top.id}})">
+                <div class="row rowInsideCard">
+                    <div class="cardInfo col-12 verticalCardInfo">
+                        <h3 class="topVolTitle ">{{top.name}}</h3>
+                        <div class="row justify-content-around text-center info3">
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-keypad " aria-hidden="true"></i><br> {{top.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-pin" aria-hidden="true"></i><br> {{top.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-stopwatch" aria-hidden="true"></i><br> {{top.time_frame}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="verticalCardImage col-12 verticalCardImage2">
+                        <img src="{{top.cover_img.url}}" class="cardImg">
+                        <img src="{{top.provider.company_logo.url}}" class="compLogo compLogoVertical2">
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+        </div>
+        <div class="col-10 col-md-7 volCardContainer" id="topVol4">
+            {% with top=tops.3 %}
+            <div class="topVolCard topVolCardVertical card4" onclick="goToDetailUrl({{top.id}})">
+                <div class="row rowInsideCard">
+                    <div class="verticalCardImage col-12 col-md-5">
+                        <img src="{{top.cover_img.url}}" class="cardImg">
+                        <img src="{{top.provider.company_logo.url}}" class="compLogo compLogoHorizontal2">
+                    </div>
+                    <div class="cardInfo col-12 verticalCardInfo">
+                        <h3 class="topVolTitle ">{{top.name}}</h3>
+                        <div class="row justify-content-around text-center info3">
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-keypad " aria-hidden="true"></i><br> {{top.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-pin" aria-hidden="true"></i><br> {{top.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-stopwatch" aria-hidden="true"></i><br> {{top.time_frame}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endwith %}
+        </div>
+    </div>
+    <div class="row justify-content-center" id="topRow2">
+        <div class="col-1 col-md-1 slideButtonContainer" id="slideLeftContainer">
+            <div class="slideButton" id="slideLeft"></div>
+        </div>
+        <div class="col-8 col-md-8 volCardContainer" id="topVolSlide">
+            {% with topVols=tops|slice:"4:" %}
+            {% for top in topVols %}
+            <div class="topVolCard topVolCardHorizontal cardSlide" id="cardSlide{{top.id}}" onclick="goToDetailUrl({{top.id}})">
+                <div class="row rowInsideCard">
+                    <div class="horizontalCardImage col-4">
+                        <img src="{{top.cover_img.url}}" class="cardImg">
+                        <img src="{{top.provider.company_logo.url}}" class="compLogo compLogoHorizontal">
+                    </div>
+                    <div class="cardInfo col-8">
+                        <h3 class="topVolTitle ">{{top.name}}</h3>
+                        <div class="row justify-content-around text-center info3">
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-keypad " aria-hidden="true"></i><br> {{top.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-pin" aria-hidden="true"></i><br> {{top.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-stopwatch" aria-hidden="true"></i><br> {{top.time_frame}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endwith %}
+        </div>
+        <div class="col-1 col-md-1 slideButtonContainer" id="slideRightContainer">
+            <div class="slideButton" id="slideRight"></div>
+        </div>
+    </div>
+</div>
+<div class="section container-fluid" id="alphabeticalLetterSection">
+    <div class="row justify-content-center" id="letterRow">
+        <div class="col-11 col-sm-10 col-md-5 buttonCol">
+            <div class="btn-group buttonLine" id="buttonLine1" role="group" aria-label="Baş Harfe Göre Filtrele">
+            {% with halflength=letters|len|div:"2" %}
+                {% with half=halflength|floatformat:'0'|tostr %}
+            {% with indexes=half|_add:"0:" %}
+                {% for letter in letters|slice:indexes %}
+                <button class="btn letterButton {% if letter == selected %}selectedButton{% endif %}">
+                    <a class="buttonLink" href="{% url 'vol_harf' letter %}">
+                        <div class="clickable">
+                        <div class="buttonText">{{letter|title}}</div>
+                        </div>
+                    </a>
+                </button>
+                {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="col-11 col-sm-10 col-md-5 buttonCol">
+            <div class="btn-group buttonLine" id="buttonLine2" role="group" aria-label="Baş Harfe Göre Filtrele">
+                 {% with indexes=half|add_:":" %}
+                {% for letter in letters|slice:indexes %}
+                <button class="btn letterButton {% if letter == selected %}selectedButton{% endif %}">
+                    <a class="buttonLink" href="{% url 'vol_harf' letter %}">
+                        <div class="clickable">
+                        <div class="buttonText">{{letter|title}}</div>
+                        </div>
+                    </a>
+                </button>
+                {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+            {% endwith %}
+            {% endwith %}
+    </div>
+</div>
+<div class="section container-fluid" id="alphabeticalVolSection">
+    <div class="row justify-content-center" id="alphaVolsRow">
+        {% for vol in letter_vols %}
+        <div class="col-8 col-md-8 volCardContainerList alphabetVol">
+            <div class="topVolCard topVolCardHorizontal alphabetCard" id="alphabetCard{{vol.id}}" onclick="goToDetailUrl({{vol.id}})">
+                <div class="row rowInsideCard">
+                    <div class="horizontalCardImage col-4">
+                        <img src="{{vol.cover_img.url}}" class="cardImg">
+                        <img src="{{vol.provider.company_logo.url}}" class="compLogo compLogoHorizontal">
+                    </div>
+                    <div class="cardInfo col-8">
+                        <h3 class="topVolTitle ">{{vol.name}}</h3>
+                        <div class="row justify-content-around text-center info3">
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-keypad " aria-hidden="true"></i><br> {{vol.category}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-pin" aria-hidden="true"></i><br> {{vol.location}}</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="anInfo"><i class="pe pe-7s-stopwatch" aria-hidden="true"></i><br> {{vol.time_frame}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    function goToDetailUrl(id){
+        location.href="{% url 'vol_ana' %}"+id;
+    }
+
+    $(function(){
+        $(document).scroll(function(){
+            var fromTop=$(this).scrollTop(),
+                pagetitle=$("#pageTitle"),
+                image=$("#titleBG");
+
+            if(fromTop<450){
+                let newTitleOpacity=1-(fromTop/300);
+                let newTitleTop=120+fromTop/1.9;
+                let newImageTop=(fromTop/3)-100 +"px";
+                pagetitle.css({"opacity":newTitleOpacity,"top":newTitleTop});
+                image.css("top",newImageTop);
+            }
+        });
+        $( window ).resize(function() {
+            $(".ball").height($(".ball").width());
+        });
+
+        $(".ball").height($(".ball").width());
+
+
+        var firstEnter=true;
+        $("#hoverableCatContainer").hover(function(){
+            var initialP=$(this).offset().top;
+            var baseline=initialP + $(this).height()/2;
+            $(this).css("overflow","scroll");
+            var scrollLength=$(this).prop('scrollWidth');
+            $(this).on("mousemove", function(e){
+                var posx=e.pageX,
+                    posy=e.pageY,
+                    yShift=(baseline-posy)/((baseline-initialP)/10);
+                $(".ball").each(function(i){
+                    let centerWidth=$(this).offset().left + $(this).width()/2;
+                    let xShift=(centerWidth-posx)/30;
+                    $(this).css("box-shadow",""+xShift+"px "+yShift+"px 20px 0px rgba(0,0,0,0.5),inset 0 0 15px 12px rgba(255,255,255,0.6)");
+                });
+
+                posx-=$(this).offset().left;
+                let currWidth=$(this).width();
+                let toScroll=scrollLength-currWidth;
+                var scrollAmount=posx/(currWidth/toScroll);
+                if(firstEnter){
+                    $(this).animate({scrollLeft:scrollAmount},600);
+                    firstEnter=false;
+                } else {
+                    $(this).scrollLeft(scrollAmount);
+                    //$(this).stop(true,false).animate({scrollLeft:scrollAmount},1);
+                }
+                $(this).css("overflow","hidden");
+            });
+        },function(){
+            firstEnter=true;
+        });
+
+        $(".ball").hover(function(){
+            $(this).find(".catImage").css({"opacity":1,"transform":"scale(1.4)"});
+            $(this).find(".volCatTitle").css("background","rgba(0,0,0,0.7)");
+        },function(){
+            $(this).find(".catImage").css({"opacity":0.1,"transform":"scale(1)"});
+            $(this).find(".volCatTitle").css("background","transparent");
+        });
+
+        $(".volCardContainer").hover(function(){
+            $(this).find(".topVolCard").css({"transform":"perspective(1500px) rotateX(360deg) "});
+        },function(){
+            $(this).find(".topVolCard").css({"transform":"perspective(1500px) rotateX(0deg) "});
+        });
+
+        $(".volCardContainerList").hover(function(){
+            $(this).find(".topVolCard").css({"transform":"perspective(1500px) rotateY(-45deg) ","left":"10%"});
+        },function(){
+            $(this).find(".topVolCard").css({"transform":"perspective(1500px) rotateY(0deg) ","left":"0"});
+        });
+
+
+        $(".cardSlide").not($(".cardSlide").get(0)).each(function(){
+            $(this).css("opacity","0");
+        });
+        var currentTopIndex=0;
+        $("#slideRightContainer").click(function(){
+            if (currentTopIndex+1<$(".cardSlide").length){
+                $(".cardSlide").eq(currentTopIndex).animate({"left":"400%","opacity":"0"},500,function(){
+                    $(".cardSlide").eq(currentTopIndex+1).animate({"opacity":"1"});
+                    $(this).css("left","0");
+                    currentTopIndex++;
+                });
+            }
+        });
+        $("#slideLeftContainer").click(function(){
+            if (currentTopIndex>0 && $(".cardSlide").eq(currentTopIndex-1)){
+                $(".cardSlide").eq(currentTopIndex).animate({"left":"-400%","opacity":"0"},500,function(){
+                    $(".cardSlide").eq(currentTopIndex-1).animate({"opacity":"1"});
+                    $(this).css("left","0");
+                    currentTopIndex--;
+                });
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+
+        var butCount=$("#buttonLine1 .letterButton").length,
+            widthPercent=100/butCount+3+"%";
+        $("#buttonLine1 .letterButton").each(function(i){
+            $(this).css("width",widthPercent);
+        });
+
+        var butCount=$("#buttonLine2 .letterButton").length,
+            widthPercent=100/butCount+3+"%";
+        $("#buttonLine2 .letterButton").each(function(i){
+            $(this).css("width",widthPercent);
+        });
+
+        $(".letterButton").hover(function(){
+            $(this).find(".buttonText").css("border-color","white");
+        }, function (){
+            $(this).find(".buttonText").css("border-color","var(--tangerine)");
+        });
+    });
+</script>
+{% endblock %}

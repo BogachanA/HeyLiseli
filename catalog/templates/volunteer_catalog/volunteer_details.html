@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load compress %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<title>{{project.name}}</title>
+{% compress css %}
+<link rel="stylesheet" href="{% static 'base/css/volunteer_details.css' %}">
+{% endcompress %}
+
+{% endblock %}
+
+{% block body %}
+    <div class="section container-fluid" id="headSection">
+        <img src="{{project.cover_img.url}}" id="coverImg">
+        <div class="row" id="tairow">
+            <div class="col-1 d-none d-md-block"></div>
+            <div class="col-12 col-sm-11 col-md-9" id="titleAndImage">
+                <div class="row" >
+                    <div class="col-5 col-md-3">
+                        <img src="{{project.provider.company_logo.url}}" id="compLogo">
+                    </div>
+                    <div class="col-7 col-md-9">
+                        <h2 id="compName">{{project.name|title}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section container-fluid" id="volInfo">
+        <div class="row justify-content-center" id="descandreq">
+            <div class="col-7 col-sm-7 col-md-4 rotateback text-right" id="descContainer">
+                <h1 class="pTitle" id="descTitle">Proje Açıklaması</h1>
+                <p class="strongbreak pText" id="volDesc">{{project.description}}</p>
+            </div>
+            <div class="col-1">
+                <div class="verticalDivider" id="vd1"></div>
+            </div>
+            <div class="col-8 col-sm-8 col-md-4 rotateback text-left text-md-right" id="reqContainer">
+                <div class="verticalDivider d-md-none" id="vd2"></div>
+                <h1 class="pTitle" id="reqTitle">Gereklilikler & Yapılacaklar</h1>
+                <p class="strongbreak splitList pText" id="volReq">{{project.responsibilities}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="tilter" id="tilter1"></div>
+    <div class="section container-fluid" id="companyInfo">
+        <div class="tilter" id="tilter2"></div>
+        <div class="circular" id="compLogoCircular">
+            <a href="{% url 'şirket_detay' project.provider.id %}" id="toComp">
+            <div class="containerForCircular">
+                <img src="{{project.provider.company_logo.url}}" id="compLogoStat">
+            </div></a>
+        </div>
+        <div class="row justify-content-around d-flex" id="descRow">
+            <div class="col-10 col-md-4" id="compInfoCol">
+                <p class="strongbreak dashHash pText bluepurple pDesc" id="pDesc1">{{project.provider.company_description}}</p>
+            </div>
+            <div class="col-10 col-md-4 text-center" id="compTitleCol">
+                <span class="titleParentheses " id="beforeTitle">(</span>
+                <h2 class="" id="compNameTitle">{{project.provider.company_name}}</h2>
+                <span class="titleParentheses " id="afterTitle">)</span>
+            </div>
+            <div class="col-10 col-md-4" id="compDesc2Col">
+                <p class="strongbreak dashHash pText bluepurple pDesc" id="pDesc2"> Wazzupp? </p>
+            </div>
+        </div>
+    </div>
+    <div class="section container-fluid" id="projectStatsContainer">
+        <h2 class="pTitle" id="statTitle">Proje Detayları</h2>
+        <div class="row justify-content-center" id="statOuterRow">
+            <div class="row justify-content-around" id="statRow">
+                <div class="col-6 col-sm-4 col-lg-2 statCol" id="catStatCol">
+                    <i class="pe pe-7s-keypad fa-5x"></i>
+                    <p class="statName" id="catStat">Kategori</p>
+                    <p class="statValue" id="catValue">{{project.category}}</p>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 statCol" id="addStatCol">
+                    <i class="pe pe-7s-date fa-5x"></i>
+                    <p class="statName" id="addStat">Ekleniş Tarihi</p>
+                    <p class="statValue translateMonth" id="addValue">{{project.date_published}}</p>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 statCol" id="locStatCol">
+                    <i class="pe pe-7s-map-2 fa-5x"></i>
+                    <p class="statName" id="locStat">Konum</p>
+                    <p class="statValue" id="locValue">{{project.location}}</p>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 statCol" id="deadStatCol">
+                    <i class="pe pe-7s-hourglass fa-5x"></i>
+                    <p class="statName" id="deadStat">Son Başvuru</p>
+                    <p class="statValue translateMonth" id="deadValue">{{project.deadline}}</p>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 statCol" id="frameStatCol">
+                    <i class="pe pe-7s-clock fa-5x"></i>
+                    <p class="statName" id="frameStat">Proje Dönemi</p>
+                    <p class="statValue" id="frameValue">{{project.time_frame}}</p>
+                </div>
+                <div class="col-6 col-sm-4 col-lg-2 statCol" id="viewStatCol">
+                    <i class="pe pe-7s-glasses fa-5x"></i>
+                    <p class="statName" id="viewStat">Görüntülenme Sayısı</p>
+                    <p class="statValue" id="viewValue">{{view_count}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        modifyPlainText();
+
+        $(document).scroll(function () {
+            var titleSect = $("#tairow");
+            var cover=$("#coverImg");
+            var fromTop=$(this).scrollTop();
+            if(fromTop<450){
+                let newTitleOpacity=1-(fromTop/600);
+                let newTitleTop=fromTop/2.5;
+                let newCoverTop=(fromTop/3);
+                titleSect.css("opacity",newTitleOpacity)
+                     .css("top",newTitleTop);
+                cover.css("top",newCoverTop);
+            }
+
+        });
+
+        function findNthOccurrence(text, toFind, n){
+            var pos=0;
+            for(i=0;i<n;i++){
+                let index=text.indexOf(toFind,pos);
+                if(index==-1){
+                    pos=-1;
+                    break;
+                }
+                if(text[index+1]=="." || text[index-1]=="."){
+                    i--;
+                }
+                pos=index+1;
+            }
+            return pos;
+        }
+
+        let compDesc=$("#pDesc1").html();
+        compDesc=compDesc.replace(/\.\.\./g,",,,");
+        let sentenceCount=compDesc.split(".").length;
+        let dotIndex=findNthOccurrence(compDesc,".",sentenceCount/2);
+        compDesc=compDesc.replace(/,,,/g,"...");
+        $("#pDesc1").html(compDesc.substr(0,dotIndex));
+        $("#pDesc2").html(compDesc.substr(dotIndex,compDesc.length-dotIndex));
+
+
+    });
+</script>
+{% endblock %}

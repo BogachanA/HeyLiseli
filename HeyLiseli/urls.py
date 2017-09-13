@@ -24,6 +24,15 @@ urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'catalog/', include('catalog.urls'), name="catalog"),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
+    url(r'^accounts/login/', views.loginView, name='custom_login'),
+    url(r'^accounts/social-registry/',views.social_auth_extras,name='social_extra'),
     url(r'^accounts/', include('registration.backends.default.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += (
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )

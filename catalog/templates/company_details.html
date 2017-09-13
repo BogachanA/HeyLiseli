@@ -24,11 +24,11 @@
                 <hr id="titleSeperator">
                 <div class="row justify-content-sm-center" id="titleInfo">
                     <div class="col-sm-5 text-sm-center">
-                        <i class="fa fa-building-o fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-building-o" aria-hidden="true"></i>
                         <span>{{company.company_field}}</span>
                     </div>
                     <div class="col-sm-5 text-sm-center">
-                        <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
                         <span>Kuruluş: {{company.establishment_date}}</span>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <p>Hakkında</p>
                     </div>
                     <div class="col-8 infoAnswer">
-                        <p id="descText">{{company.company_description}}</p>
+                        <p class="strongbreak dashHash" id="descText">{{company.company_description}}</p>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-8 col-md-12 infoAnswer" id="socialLinksAnswer">
                         {% for key, value in social_links.items %}
-                            {% if not social_links.key == "none" %}
+                            {% if not value == "http://none.com"%}
                                 {% with keyShort=key|substring:'0,4' %}
                                     <a class="aLink" id="{{keyShort}}Link" href="{{value}}" target="_blank">
                                         <div class="row justify-content-center socialRow">
@@ -154,15 +154,7 @@
 
 <script type="text/javascript">
     $( function(){
-
-        var initDesc=$("#descText").html(),
-            finalDesc=initDesc.replace(/;br;/g,"<br>"),
-            finalDesc=finalDesc.replace(/;st;/g,"<strong>"),
-            finalDesc=finalDesc.replace(/;st.;/g,"</strong>"),
-            finalDesc=finalDesc.replace(/--/g,'<br><i class="fa fa-slack" style="color:gray;" aria-hidden="true"></i>');
-
-        $("#descText").html(finalDesc);
-
+        modifyPlainText();
     });
 </script>
 {% endblock %}

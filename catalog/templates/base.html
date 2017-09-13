@@ -1,8 +1,6 @@
-
 {% load staticfiles %}
 {% load customFilters %}
 {% load compress %}
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -21,6 +19,8 @@
     {% compress css %}
     <link rel="stylesheet" href="{% static 'base/css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/base_css.css' %}">
+    <link rel="stylesheet" href="{% static 'base/pe-icon-7-stroke/css/pe-icon-7-stroke.css' %}">
+    <link rel="stylesheet" href="{% static 'base/pe-icon-7-stroke/css/helper.css' %}">
     {%endcompress %}
 
     {% block head %}
@@ -51,7 +51,7 @@
                 </div>
                 <hr>
                 <div class="col-md-2 textLinks h-100" id="volsLink">
-                    <a href="#" id="toVol">Katkıda Bulun</a>
+                    <a href="{% url 'vol_ana' %}" id="toVol">Katkıda Bulun</a>
                 </div>
                 <div class="col-md-4 d-none d-md-block" id="toHome">
                     <a href="{% url 'home' %}" ><img src="{% static 'base/img/heyliseli_logo.png' %}" id="navbarLogo"></a>
@@ -85,8 +85,8 @@
             <div class="row">
                 <div class="col-md-7 ml-md-auto" id="merhaba" data-aos="fade-right" data-aos-delay="2500" data-aos-duration="900">
                     <h1>Merhaba Liseli, <br>Doğru Yere Geldin...</h1>
-                    <p class="text-secondary" style="font-size:20px; color: var(--aluminum);">Hayatın boyunca sana hep bir sürü fırsata sahip olduğunu söyleyip durdular. Fakat fark etmişsindir ki, bu fırsatlara erişmek o kadar kolay değil herkes için.</p>
-                    <button class="btn" type="button" id="regi" data-aos="fade-right" data-aos-delay="3000">Şimdi Kaydol!</button>
+                    <p class="" style="font-size:20px;">Hayatın boyunca sana hep bir sürü fırsata sahip olduğunu söyleyip durdular. Fakat fark etmişsindir ki, bu fırsatlara erişmek o kadar kolay değil herkes için.</p>
+                    <a href="{% url 'registration_register' %}"> <button class="btn" type="button" id="regi" data-aos="fade-right" data-aos-delay="3000">Şimdi Kaydol!</button></a>
                 </div>
             </div>
         </div>
@@ -197,6 +197,8 @@
         </div>
     </div>
 
+
+    <!-- TODO fix slideshow -->
     <div class="section container-fluid" id="slideshow">
         <div class="row justify-content-center" id="carriesSlides">
             <div class="col-sm-10" id="slideshowContainer">
@@ -331,11 +333,91 @@
     <script src="{% static 'base/js/paraxify.min.js' %}"></script>
     {% endcompress %}
 
-    <script type="text/javascript">
+    <script type="text/javascript" id="globals">
         var myParaxify = paraxify('.paraxify', {
             speed: 1,
             boost: 0.3,
         });
+
+        var strongBreak = function (textObject){
+            textObject.html(textObject.html().replace(/;st;/g,"<strong>").replace(/;st.;/g,"</strong>").replace(/;br;/g,"<br>"));
+        }
+
+        function splitIntoList(textToSplit){
+
+            var sentences=textToSplit.split(";.;");
+            var finalStringHTML="";
+            for (var sent of sentences){
+                var newSent=sent.replace("-","");
+                finalStringHTML+=newSent+" <i class='fa fa-check-circle' style='color:var(--sblue);' aria-hidden='true'></i><br>";
+            }
+            finalStringHTML=finalStringHTML.substr(0,finalStringHTML.length-86);
+
+            return finalStringHTML;
+        }
+
+        function translateMonth(dateAsHTML){
+            var splitted=dateAsHTML.split(" ");
+            var translated="";
+            switch(splitted[0]){
+                case "Jan.":
+                    translated="Ocak";
+                    break;
+                case "Feb.":
+                    translated="Şubat";
+                    break;
+                case "March":
+                    translated="Mart";
+                    break;
+                case "April":
+                    translated="Nisan";
+                    break;
+                case "May":
+                    translated="Mayıs";
+                    break;
+                case "June":
+                    translated="Haziran";
+                    break;
+                case "July":
+                    translated="Temmuz";
+                    break;
+                case "Aug.":
+                    translated="Ağustos";
+                    break;
+                case "Sept.":
+                    translated="Eylül";
+                    break;
+                case "Oct.":
+                    translated="Ekim";
+                    break;
+                case "Nov.":
+                    translated="Kasım";
+                    break;
+                case "Dec.":
+                    translated="Aralık";
+                    break;
+            }
+            return translated+" "+splitted[1]+" "+splitted[2];
+        }
+
+        function dashToHash(textObject){
+            textObject.html(textObject.html().replace(/--/g,'<br><i class="fa fa-slack" style="color:var(--tangerine);" aria-hidden="true"></i>'));
+        }
+
+        function modifyPlainText(){
+            $(".splitList").each(function(i){
+                $(this).html(splitIntoList($(this).html()));
+            });
+            $(".strongbreak").each(function(i){
+                strongBreak($(this));
+            });
+            $(".translateMonth").each(function(){
+                $(this).html(translateMonth($(this).html()));
+            });
+            $(".dashHash").each(function(){
+                dashToHash($(this));
+            });
+        }
     </script>
 
 
@@ -343,9 +425,8 @@
     $(function(){
         $(document).scroll(function () {
             var nav = $(".fixed-top");
-            var navImg=$("#navbarLogo");
-            nav.toggleClass('scrolled', $(this).scrollTop() > nav.height());
-            nav.toggleClass('scrolledBack', $(this).scrollTop() < nav.height());
+            nav.toggleClass('scrolled', $(this).scrollTop() >= nav.height());
+            nav.toggleClass('scrolledBack', $(this).scrollTop() <2);
         });
     });
     </script>
@@ -385,6 +466,7 @@
                         studentUp.start();
                     }
                 });
+
 
             });
         </script>

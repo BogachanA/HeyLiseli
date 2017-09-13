@@ -4,9 +4,10 @@
 }
 #bg-image{
     background-image: url('../img/highschool_bg.png');
-    height: 1000px;
+    height: 1450px;
+    background-size: 100% 100%;
 }
-#logincontainer{
+#registercontainer{
     position: absolute;
     z-index: 4;
     width: 100%;
@@ -14,18 +15,17 @@
     top: 20%;
     overflow-x: hidden;
 }
-#loginBox{
-    background-color: rgba(241,159,77,0.35);
+#registerBox{
+    background-color: rgba(68,132,206,0.35);
     box-shadow: 0 0 0px black;
     border-radius: 20px;
     padding: 0;
 }
-#loginHead{
-    background-color: rgba(241,159,77,0.7);
+#registerHead{
+    background-color: rgba(68,132,206,0.7);
     height: 65px;
-    
 }
-#loginBody{
+#registerBody{
     padding: 0;
 }
 h1{
@@ -43,59 +43,125 @@ h1{
     transform: scale(1.3);
     box-shadow: 0 0 40px rgba(0,0,0,0.7);
 }
-
-
-
 #cap{
     color: black;
     margin: 20px;
     font-size: 120px;
 }
-#logincontainer input{
+#cap:focus{
+    outline: none;
+}
+#registercontainer input{
     background-color: transparent;
     border:none;
-    width: 70%;
+    width: 35%;
     margin-bottom: 20px;
     font-size: 20px;
-    text-align: center;
+    text-align: left;
     color: white;
-    border-bottom:1px solid transparent;
+    border-bottom:3px solid transparent;
 }
-#logincontainer input:focus {
+#registercontainer input:focus {
   position: relative;
   outline:none;
+}
+.popover{
+    background: none;
+    border-radius: 20px;
+}
+.popover-header{
+    background: rgba(0,0,0,0.9);
+    color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.popover-body{
+    background: rgba(0,0,0,0.75);
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.popover-arrow{
+    background: rgba(0,0,0,0.6);
+}
+.notValid{
+    border-bottom: 3px solid red !important;
+    background: rgba(255,0,0,0.3) !important;
+}
+.isValid{
+    border: none !important;
+    border-bottom: 2px solid mediumseagreen !important;
+}
+#errors{
+    font-family: 'Comfortaa',sans-serif;
+    width: 75%;
+    margin: 20px auto;
+    background: rgba(255,0,0,0.5);
+    color: white;
+    border-radius: 25px;
+    overflow: hidden;
+    padding-left: -20px;
+}
+#errorTitle{
+    background: rgba(255,0,0,0.8);
+    width: 100%;
+    padding: 5px;
+    height: 35px;
+}
+#errorTexts{
+    margin-left: -30px;
+    padding: 10px;
+}
+#errors ul{
+    list-style-type: none;
+}
+select{
+    border: 2px solid rgba(255,255,255,0.6);
+    background-color: transparent;
+    color: white;
+    width: 35%;
+    -webkit-appearance:none;
+    border-radius: 3px;
+    text-align: center;
+    padding: 5px;
+}
+select:focus{
+    outline: none;
+}
+form a{
+    position: relative;
+}
+.openDown{
+    position: absolute;
+    right: 3%;
+    bottom: -7px;
+    color: rgba(255,255,255,0.6);
+}
+#schoolSelect{
+    margin-left: 15px;
 }
 #submitbutton{
     border: 1px solid transparent;
     width: 70%;
     border-radius: 25px;
     color: white;
-    background-color: rgba(241,159,77,0.7);
+    background-color: rgba(68,132,206,0.7);
     font-family: 'Roboto',sans-serif;
     font-weight: bold;
     margin-bottom: 15px;
 }
-#registerbutton{
+#loginbutton{
     border: 1px solid transparent;
     width: 70%;
     border-radius: 25px;
     color: white;
     height: 50px;
-    background-color: rgba(241,159,77,0.7);
+    background-color: rgba(68,132,206,0.7);
     font-family: 'Roboto',sans-serif;
     font-weight: bold;
     font-size: 130%;
     margin: 15px 0;
     margin-bottom: 25px;
-}
-.longDash{
-    width: 120px;
-    display: inline;
-}
-.hollow{
-    color: rgb(192, 186, 176);
-    font-size: 20px;
-    margin: 15px; 
 }
 .socialButtons{
     width: 70%;
@@ -104,9 +170,9 @@ h1{
     margin: 20px auto;
 }
 .middleLine{
-    width: 50px;
+    width: 120px;
     height: 2px;
-    background-color: rgb(192, 186, 176);
+    background-color: rgb(68, 132, 206);
     display: inline-block;
     position: relative;
     top: -5px;
@@ -133,7 +199,6 @@ a:hover{
 }
 
 
-
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: rgba(255,255,255,0.5);
     text-align: center;
@@ -150,3 +215,15 @@ a:hover{
 :-moz-placeholder { /* Firefox 18- */
   color: rgba(255,255,255,0.5);
     text-align: center;
+}
+
+@media(max-width:767px){
+    #schoolSelect{
+        margin-left: 35px;
+    }
+}
+@media(max-width:575px){
+    #schoolSelect{
+        margin-left: 10px;
+    }
+}

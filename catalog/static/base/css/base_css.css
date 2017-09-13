@@ -3,9 +3,15 @@
     --light:#F9CF00; /*rgb(249,207,0)*/
     --aluminum: #D9D9D9; /* 217,217,217 */
     --sblue: #4484CE; /*rgb(68,132,206)*/
+    --darkblue:rgb(59, 105, 137);
 }
+
 body, html {
     height: 100%;
+}
+
+input:focus, textarea:focus,button:focus {
+    outline: none;
 }
 
 #navbarLogo{
@@ -21,6 +27,13 @@ body, html {
 }
 #logoOnSmallDiv{
     float: left;
+}
+.fixed-top{
+    background-color: -moz-linear-gradient(top, rgba(3,11,15,0.8) 0%, rgba(5,15,20,0.5) 57%, rgba(224,227,229,0) 100%); /* FF3.6-15 */
+    background-color: -webkit-linear-gradient(top, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background-color: linear-gradient(to bottom, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    transition: background-color 1.2s;
+    -webkit-transition: background-color 1.2s;
 }
 
 
@@ -40,9 +53,6 @@ body, html {
 }
 #navigate{
     padding:0px;
-    background: -moz-linear-gradient(top, rgba(3,11,15,0.8) 0%, rgba(5,15,20,0.5) 57%, rgba(224,227,229,0) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 
@@ -54,6 +64,9 @@ body, html {
     text-decoration: none;
     font-weight: bolder;
     
+}
+.textLinks{
+    transition: all 0.6s;
 }
 
 .textLinks a:hover{
@@ -92,18 +105,20 @@ hr{
 
 @keyframes whitebackForNavbar{
     from {
-        background: background: -moz-linear-gradient(top, rgba(3,11,15,0.8) 0%, rgba(5,15,20,0.5) 57%, rgba(224,227,229,0) 100%); /* FF3.6-15 */
-        background: -webkit-linear-gradient(top, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
-        background: linear-gradient(to bottom, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */;
+        background-color: background: -moz-linear-gradient(top, rgba(3,11,15,0.8) 0%, rgba(5,15,20,0.5) 57%, rgba(224,227,229,0) 100%); /* FF3.6-15 */
+        background-color: -webkit-linear-gradient(top, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
+        background-color: linear-gradient(to bottom, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */;
     }
-    to {background: var(--tangerine);}
+    to {background-color: var(--tangerine);}
 }
-.scrolled{
-    animation: whitebackForNavbar 1s;
+.fixed-top.scrolled{
+    animation-name: whitebackForNavbar;
+    animation-duration: 0.8s;
     animation-fill-mode: forwards;
+    
 }
 .scrolledBack{
-    animation: whitebackForNavbar 0.6s;
+    animation: whitebackForNavbar 0.8s;
     animation-direction: reverse;
     animation-fill-mode: backwards;
 }

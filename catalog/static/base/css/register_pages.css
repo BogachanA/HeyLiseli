@@ -1,0 +1,69 @@
+#mainView{
+    height: auto;
+    position: static;
+}
+#bg-image{
+    background-image: url('../img/highschool_bg.png');
+    height: 600px;
+}
+#registercontainer{
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    padding: 0;
+    top: 20%;
+    overflow-x: hidden;
+}
+#logoBound{
+    height: 100px;
+    width: 170px;
+}
+#registerBox{
+    background-color: rgba(68,132,206,0.35);
+    box-shadow: 0 0 0px black;
+    border-radius: 20px;
+    padding: 0;
+}
+#registerHead{
+    background-color: rgba(68,132,206,0.7);
+    height: 100px;
+}
+#registerBody{
+    padding: 25px;
+}
+h1{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#bodyText{
+    font-family: 'Comfortaa',sans-serif;
+    color: white;
+}
+#cardIcon{
+    font-size: 14vw;
+    margin: 0px auto;
+    color: rgba(241,159,77,0.7);
+    position: relative;
+    left: 18%;
+}
+
+@media (max-width:767px){
+    #cardIcon{
+        font-size: 20vw;
+        margin: 10px;
+    }
+    #registerHead{
+        height: auto;
+        min-height: 160px;
+    }
+    h1{
+        transform: none;
+        top: 0;
+    }
+    #bg-image{
+        height: 720px;
+    }
+}

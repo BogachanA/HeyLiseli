@@ -1,0 +1,93 @@
+{% load staticfiles %}
+
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>HeyLiseli</title>
+    <link href="https://fonts.googleapis.com/css?family=Abel|Black+Ops+One|Comfortaa:400,700|Droid+Sans:400,700|Jockey+One|Poiret+One|Poppins:400,700|Quicksand:300,400,700|Roboto:400,700" rel="stylesheet">
+    <script src="https://use.fontawesome.com/34c9fa160a.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<body>
+<div style="background-color:#4484ce;">
+  <!--[if gte mso 9]>
+  <v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
+    <v:fill type="tile" src="http://localhost:8000/media//extras/hobbies.jpg" color="#4484ce"/>
+  </v:background>
+  <![endif]-->
+  <table height="100%" width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td valign="top" align="left" background="http://localhost:8000/media//extras/hobbies.jpg">
+<div class="container-fluid" id="mainContainer" style="">
+    <div class="row justify-content-center">
+        <div class="col-8" id="mainCol" style="border-radius: 25px;
+    moz-border-radius: 25px;
+    khtml-border-radius: 25px;
+    o-border-radius: 25px;
+    webkit-border-radius: 25px;
+    ms-border-radius: 25px;
+    margin: 40px;">
+            <div class="section row justify-content-center" id="logoHeader" style="height: auto;
+    background: #fc9732;
+background: -moz-linear-gradient(-45deg, #fc9732 0%, #f17432 50%, #ea5507 51%, #f98c48 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #fc9732 0%,#f17432 50%,#ea5507 51%,#f98c48 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #fc9732 0%,#f17432 50%,#ea5507 51%,#f98c48 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc9732', endColorstr='#f98c48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */">
+                <div class="col-5">
+                <img src="http://localhost:8000/media//logo/heyliseli_logo.png" id="logo" style="height: 100px;
+    width: 170px;
+    margin: 5px auto;"></div>
+            </div>
+            <div class="section" id="contentBody" style="padding: 20px;
+    background: #ffb76b; /* Old browsers */
+background: -moz-linear-gradient(left, #ffb76b 0%, #ffa73d 27%, #ffa73d 27%, #ff7c00 68%, #ff7c00 68%, #ff7c00 79%, #ff7f04 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #ffb76b 0%,#ffa73d 27%,#ffa73d 27%,#ff7c00 68%,#ff7c00 68%,#ff7c00 79%,#ff7f04 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #ffb76b 0%,#ffa73d 27%,#ffa73d 27%,#ff7c00 68%,#ff7c00 68%,#ff7c00 79%,#ff7f04 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ff7f04',GradientType=1 ); /* IE6-9 */
+
+    font-family: 'Comfortaa',sans-serif;
+    color: white;
+    font-size: 15px;">
+                <h2 id="Title" style="font-family: 'Abel',sans-serif;
+    font-weight: bolder; font-size:30px;">
+                    Hazır Mısın?
+                </h2>
+                <i id="key" class="fa fa-key fa-4x float-right" aria-hidden="true" style="text-shadow: 0 0 1px 1px rgba(0,0,0,0.6);
+    color: var(--light);"></i>
+                <br>
+                <p>Merhaba liseli, az önce {{site.name}}'ye yaptığın kayıt başvurusunu aldık.
+                Şimdi tek yapman gereken kaydını tamamlamak için aşağıdaki aktivasyon linkine tıklamak olacak.</p>
+                <br>
+                <a id="link">http://{{site.domain}}{% url 'registration_activate' activation_key %}</a>
+                <p>Unutma, bu link kendini {{expiration_days}} gün içinde imha edecektir. Merak etme, patlama yok.</p>
+                <p>Eğer HeyLiseli'ye sen kayıt olmadıysan, bu maili direk görmezden gelmen yeterli.</p>
+                <br>
+                <p>Herhangi bir problem olursa veya aklına takılan bir soru varsa durma: <a href="mailto:heyliseligenc@gmail.com" style="color:var(--tangerine);font-weight:bolder">bize bir mail gönder!</a></p>
+                <br> <p>-HeyLiseli Ekibi</p>
+            </div>
+            <div class="section row justify-content-center" id="footer" style="color: white;
+    height: 40px;
+    font-size: 25px;
+    background: #fc9732; /* Old browsers */
+background: -moz-linear-gradient(-45deg, #fc9732 0%, #f17432 50%, #ea5507 51%, #f98c48 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, #fc9732 0%,#f17432 50%,#ea5507 51%,#f98c48 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, #fc9732 0%,#f17432 50%,#ea5507 51%,#f98c48 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fc9732', endColorstr='#f98c48',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */ ">
+                <div class="col-3">
+                <span style="margin: 10px auto;">
+                    2017 ©
+                </span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+</body>
+</html>
