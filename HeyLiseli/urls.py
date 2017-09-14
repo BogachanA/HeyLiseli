@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^cokgizligiris/', admin.site.urls),
     url(r'^$', views.home, name="home"),
     url(r'catalog/', include('catalog.urls'), name="catalog"),
+    url(r'^projects/', include('studentAds.urls'), name='student_projects'),
     url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^accounts/login/', views.loginView, name='custom_login'),
     url(r'^accounts/social-registry/',views.social_auth_extras,name='social_extra'),

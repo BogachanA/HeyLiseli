@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'compressor',
     'social_django',
     'catalog',
+    'studentAds',
     'registration',
     'debug_toolbar',
+    'multiselectfield',
 ]
 
 MIDDLEWARE = [

@@ -65,6 +65,18 @@ class Provider(models.Model):
         return "%s" % (self.company_name)
 
 
+def flag_upload_path(instance, filename):
+    return '/'.join(['Languages',str(instance.id),filename])
+
+
+class Language(models.Model):
+    name=models.CharField(max_length=100)
+    flag=models.ImageField(upload_to=flag_upload_path,default='categories/no-icon.png')
+
+    def __str__(self):
+        return "%s" % self.name
+
+
 def category_image_path(instance, filename):
     return '/'.join(['categories',str(instance.id),filename])
 
@@ -102,6 +114,7 @@ class Internship(models.Model):
     time_frame=models.CharField(max_length=200,default="Belirli Zaman Yok")
     cover_img=models.ImageField(upload_to=int_cover_image_path,default='categories/no-icon.png')
     view_count=models.IntegerField(default=0)
+    language=models.ForeignKey(Language,null=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -151,6 +164,7 @@ class VolunteerProject(models.Model):
     time_frame = models.CharField(max_length=200, default="Yıl İçi")
     cover_img = models.ImageField(upload_to=vol_cover_image_path, default='categories/no-icon.png')
     view_count = models.IntegerField(default=0)
+    language = models.ForeignKey(Language, null=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

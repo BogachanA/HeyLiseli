@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load compress %}
+
+{% block head %}
+<title>{{project.name}}</title>
+<link rel="stylesheet" href="{% static 'base/css/project_detail.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="section container-fluid" id="allContainer">
+    <div class="row justify-content-center" id="carrier"></div>
+</div>
+{% endblock %}

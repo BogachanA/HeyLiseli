@@ -146,7 +146,8 @@
 
         let compDesc=$("#pDesc1").html();
         compDesc=compDesc.replace(/\.\.\./g,",,,");
-        let sentenceCount=compDesc.split(".").length;
+        let sentenceCount=compDesc.split(".").length-1;
+        alert(sentenceCount);
         let dotIndex=findNthOccurrence(compDesc,".",sentenceCount/2);
         compDesc=compDesc.replace(/,,,/g,"...");
         $("#pDesc1").html(compDesc.substr(0,dotIndex));
