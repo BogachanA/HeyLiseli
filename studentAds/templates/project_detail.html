@@ -8,7 +8,190 @@
 {% endblock %}
 
 {% block body %}
-<div class="section container-fluid" id="allContainer">
-    <div class="row justify-content-center" id="carrier"></div>
+<div class="section container-fluid" id="headContainer"><!--
+     style="background:url({{project.category.cover_image.url}});
+            background-position: 50% -300px;
+            background-size:150% 200%;"-->
+    <img id="catBG" src="{{project.category.cover_image.url}}" style="width:100%;height:100%;position:absolute;z-index:-2;top:0;left:0;">
+    <div class="row justify-content-center" id="carrier">
+        <div class="col-12" id="titleBlock">
+            <h1 id="projectTitle">{{project.name|title}}</h1>
+            <div class="diamonds-pane">
+                <div class="diamond" id="diamond1">
+                    <img class="catAlphaIcon" id="catAlphaIcon1" src="{{project.category.alpha_icon.url}}">
+                </div>
+                <div class="diamond" id="diamondMiddle" style="{{project.category.background_gradient}}">
+                    <h6 class="catTitle">{{project.category}}</h6>
+                </div>
+                <div class="diamond" id="diamond3">
+                    <img class="catAlphaIcon" id="catAlphaIcon2" src="{{project.category.alpha_icon_2.url}}">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="section container-fluid" id="projectDescContainer">
+    <div class="row justify-content-center" id="mainDescRow">
+        <div class="col-12" id="descriptionSection">
+            <h3 class="sectionTitle" id="descTitle">Proje Açıklaması</h3>
+            <p class="strongbreak sectionText" id="descText">{{project.description}}</p>
+        </div>
+    </div>
+</div>
+<div class="section container-fluid" id="DoubleContainer">
+    <div class="row" id="nestedSectionsRow">
+        <div class="col-12 col-sm-6 infoSection" id="ownerInfoCol">
+            <div class="row justify-content-start">
+                <div class="col-5 col-md-3" id="ppCol">
+                    <img src="{{project.owner.user_image.url}}" id="userPP">
+                </div>
+                <div class="col-7 col-md-9" id="userTextCol">
+                    <h4 class="ownerTitle">Proje Sahibi: <span class="username">{{project.owner}}</span></h4>
+                    <p class="userText userSummary">{{project.owner.summary}}</p>
+                    {% if project.owner.first_name %}
+                    <p class="userText userSignature">- {{project.owner.first_name}} {{project.owner.last_name}}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 infoSection" id="projectStatCol">
+            <h3 class="sectionTitle" id="statTitle">Proje Detayları</h3>
+            <div class="row justify-content-center statRow">
+                <div class="col-6 statCol">
+                    <i class="fa fa-pencil-square-o fa-3x statIcon" id="addIcon" aria-hidden="true"></i>
+                    <h6 class="statName" id="addStat">Yayınlanma Tarihi</h6>
+                    <p class="statValue translateMonth" id="addVal">{{project.date_added}}</p>
+                </div>
+                <div class="col-6 statCol secondStat">
+                    <i class="fa fa-location-arrow fa-3x statIcon" id="locIcon" aria-hidden="true"></i>
+                    <h6 class="statName" id="locStat">Proje Konumu</h6>
+                    <p class="statValue" id="locVal">{{project.location }}</p>
+                </div>
+                <div class="col-6 statCol">
+                    <i class="fa fa-calendar-check-o fa-3x statIcon" id="dueIcon" aria-hidden="true"></i>
+                    <h6 class="statName" id="dueStat">Başlangıç Tarihi</h6>
+                    <p class="statValue translateMonth" id="dueVal">{{project.project_start}}</p>
+                </div>
+                <div class="col-6 statCol secondStat">
+                    <i class="fa fa-globe fa-3x statIcon" id="langIcon" aria-hidden="true"></i>
+                    <h6 class="statName" id="langStat">Proje Dili</h6>
+                    <p class="statValue" id="langVal">{{project.language }}</p>
+                </div>
+                <div class="col-6 statCol">
+                    <i class="fa fa-eye fa-3x statIcon" id="viewIcon" aria-hidden="true"></i>
+                    <h6 class="statName" id="viewStat">Görüntülenme</h6>
+                    <p class="statValue " id="viewVal">{{project.view_count}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="section container-fluid" id="requirementsContainer">
+    <div class="row justify-content-center">
+        <div class="col-3 titleCol" id="allowedClassTitle">
+            <h3 class="reqTitle" id="reqGradeTitle">Kaçıncı Sınıf Liseliler Katılabilir?</h3>
+        </div>
+        <div class="col-7 answerCol" id="reqGradesCol">
+            <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>
+            {{project.allowed_grades}}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        modifyPlainText();
+
+        $( window ).resize(function() {
+            if($( window ).width()<767){
+                $(".diamonds-pane").css("width","180px");
+            } else{
+                $(".diamonds-pane").css("width","250px");
+            }
+
+            $("#userPP").css("height",$("#userPP").css("width"));
+        });
+
+        $("#userPP").css("height",$("#userPP").css("width"));
+
+        $("#diamondMiddle").hover(function(){
+            $(".diamonds-pane").stop(true,false).animate({"width": $( window ).width() < 767 ? "210px":"290px"},600);
+        },function(){
+            $(".diamonds-pane").stop(true,false).animate({"width":$( window ).width() < 767 ? "180px":"250px"},600);
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        (function () {
+            var lastTime = 0,
+                vendors = ['ms', 'moz', 'webkit', 'o'],
+                // Feature check for performance (high-resolution timers)
+                hasPerformance = !!(window.performance && window.performance.now);
+
+            for(var x = 0, max = vendors.length; x < max && !window.requestAnimationFrame; x += 1) {
+                window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame']
+                                           || window[vendors[x]+'CancelRequestAnimationFrame'];
+            }
+
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = function(callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                      timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+            }
+
+            if (!window.cancelAnimationFrame) {
+                window.cancelAnimationFrame = function(id) {
+                    clearTimeout(id);
+                };
+            }
+
+            // Add new wrapper for browsers that don't have performance
+            if (!hasPerformance) {
+                // Store reference to existing rAF and initial startTime
+                var rAF = window.requestAnimationFrame,
+                    startTime = +new Date;
+
+                // Override window rAF to include wrapped callback
+                window.requestAnimationFrame = function (callback, element) {
+                    // Wrap the given callback to pass in performance timestamp
+                    var wrapped = function (timestamp) {
+                        // Get performance-style timestamp
+                        var performanceTimestamp = (timestamp < 1e12) ? timestamp : timestamp - startTime;
+
+                        return callback(performanceTimestamp);
+                    };
+
+                    // Call original rAF with wrapped callback
+                    rAF(wrapped, element);
+                }
+            }
+        })();
+
+        var fromTop=0;
+        var headHeight=$("#headContainer").height();
+        function updatePos(){
+            let newYPosition=fromTop*0.65;
+                let newBP=round(newYPosition,0)+"px";
+                $("#catBG").css({"top":newBP});
+        }
+
+        $(document).scroll(function () {
+            fromTop=$(this).scrollTop();
+            if(fromTop<headHeight){
+                window.requestAnimationFrame(updatePos);
+            }
+        });
+
+    });
+
+</script>
 {% endblock %}

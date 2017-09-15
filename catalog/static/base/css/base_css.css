@@ -5,6 +5,47 @@
     --sblue: #4484CE; /*rgb(68,132,206)*/
     --darkblue:rgb(59, 105, 137);
 }
+@font-face{
+    font-family:'Cliche';
+    src:url('../fonts/Cliche-Regular.otf') format('otf');
+    font-weight: normal;
+    font-style:normal;
+}
+@font-face {
+    font-family: 'AlterLight';
+    src: url('../fonts/alterlight/alterlight-regular-webfont.woff2') format('woff2'),
+         url('../fonts/alterlight/alterlight-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'Alterlight swish';
+    src: url('../fonts/alterlight/alterlightswash-regular-webfont.woff2') format('woff2'),
+         url('../fonts/alterlightalterlightswash-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Zipper';
+    src: url('../fonts/zipper/zipper-regular-webfont.woff2') format('woff2'),
+         url('../fonts/zipper/zipper-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Zimbra';
+    src: url('../fonts/zimbra/zimbra-bold-webfont.woff2') format('woff2'),
+         url('../fonts/zimbra/zimbra-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
 
 body, html {
     height: 100%;
@@ -105,9 +146,9 @@ hr{
 
 @keyframes whitebackForNavbar{
     from {
-        background-color: background: -moz-linear-gradient(top, rgba(3,11,15,0.8) 0%, rgba(5,15,20,0.5) 57%, rgba(224,227,229,0) 100%); /* FF3.6-15 */
+        background-color: -moz-linear-gradient(top, rgba(3,11,15,0.8) 0%, rgba(5,15,20,0.5) 57%, rgba(224,227,229,0) 100%); /* FF3.6-15 */
         background-color: -webkit-linear-gradient(top, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* Chrome10-25,Safari5.1-6 */
-        background-color: linear-gradient(to bottom, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */;
+        background-color: linear-gradient(to bottom, rgba(3,11,15,0.8) 0%,rgba(5,15,20,0.5) 57%,rgba(224,227,229,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     }
     to {background-color: var(--tangerine);}
 }

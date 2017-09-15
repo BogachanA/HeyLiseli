@@ -15,7 +15,7 @@ class LiseliUserChangeForm(UserChangeForm):
 class LiseliAdmin(UserAdmin):
     form = LiseliUserChangeForm
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('lise', 'grade',)}),
+        (None, {'fields': ('lise', 'grade','gender','user_image')}),
     )
 
 
@@ -58,6 +58,10 @@ class VolViewAdmin(admin.ModelAdmin):
     ordering = ('rel_vol',)
 
 
+class LanguageAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
+
 class SessionAdmin(admin.ModelAdmin):
     list_display = ('user', 'session')
     ordering = ('user',)
@@ -69,6 +73,7 @@ admin.site.register(Internship, IntAdmin)
 admin.site.register(VolunteerProject,VolAdmin)
 admin.site.register(IntCategory, IntCatAdmin)
 admin.site.register(VolCategory,VolCatAdmin)
+admin.site.register(Language,LanguageAdmin)
 admin.site.register(Provider,ProviderAdmin)
 admin.site.register(Int_View, IntViewAdmin)
 admin.site.register(VolView, VolViewAdmin)

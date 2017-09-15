@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.contrib.sessions.models import Session
 from django.conf import settings
+from random import randint
 
 # Create your models here.
 
@@ -14,7 +15,12 @@ class Lise(models.Model):
         return "%s" % self.name
 
 
+def user_image_upload_path(instance,filename):
+    return "/".join(["UserPhotos",str(instance.id),filename])
+
+
 class Liseli(AbstractUser):
+    summary=models.TextField(max_length=300,default="Sadece benzersiz marjinal bir başka liseliyim. Yerimde duramıyorum aman allahım.")
     lise=models.ForeignKey(Lise, null=True)
     GRADE_CHOICES=(
         ("Choose","---Sınıfını Seç---"),
@@ -25,8 +31,24 @@ class Liseli(AbstractUser):
         ("12", "12. sınıf"),
         ("Done", "Liseyi Bitirdim"),
     )
+    GENDERS=(
+        ('Choose','---Cinsiyetin---'),
+        ('M','Erkek'),
+        ('F','Kadın'),
+        ('N/A','Kendimi bu seçeneklerle tanımlamıyorum'),
+    )
     grade=models.CharField(max_length=100,choices=GRADE_CHOICES,default="Hazırlık")
+    gender=models.CharField(max_length=150,choices=GENDERS,default='Choose')
+    user_image=models.ImageField(upload_to=user_image_upload_path,default='categories/no-icon.png',blank=True)
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+
+        if self.user_image == "categories/no-icon.png" or not self.user_image:
+            int=randint(1,5)
+            self.user_image = 'user_pp/user_pp_'+str(int)+'.jpg'
+
+        super(Liseli, self).save()
 
     def __str__(self):
         return "%s" % (self.username)
@@ -67,6 +89,8 @@ class Provider(models.Model):
 
 def flag_upload_path(instance, filename):
     return '/'.join(['Languages',str(instance.id),filename])
+
+DEFAULT_LANGUAGE_ID=1
 
 
 class Language(models.Model):
@@ -114,7 +138,7 @@ class Internship(models.Model):
     time_frame=models.CharField(max_length=200,default="Belirli Zaman Yok")
     cover_img=models.ImageField(upload_to=int_cover_image_path,default='categories/no-icon.png')
     view_count=models.IntegerField(default=0)
-    language=models.ForeignKey(Language,null=True)
+    language=models.ForeignKey(Language,null=True,default=DEFAULT_LANGUAGE_ID)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -164,7 +188,7 @@ class VolunteerProject(models.Model):
     time_frame = models.CharField(max_length=200, default="Yıl İçi")
     cover_img = models.ImageField(upload_to=vol_cover_image_path, default='categories/no-icon.png')
     view_count = models.IntegerField(default=0)
-    language = models.ForeignKey(Language, null=True)
+    language = models.ForeignKey(Language, null=True,default=DEFAULT_LANGUAGE_ID)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

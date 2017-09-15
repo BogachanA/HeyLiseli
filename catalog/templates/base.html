@@ -9,6 +9,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <link href="https://fonts.googleapis.com/css?family=Abel|Black+Ops+One|Comfortaa:400,700|Droid+Sans:400,700|Jockey+One|Poiret+One|Poppins:400,700|Quicksand:300,400,700|Roboto:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Limelight|Monoton|Work+Sans:800" rel="stylesheet">
     <script src="https://use.fontawesome.com/34c9fa160a.js"></script>
 
     <!-- Bootstrap CSS -->
@@ -338,6 +339,10 @@
             speed: 1,
             boost: 0.3,
         });
+
+        function round(value, decimals) {
+          return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+        }
 
         var strongBreak = function (textObject){
             textObject.html(textObject.html().replace(/;st;/g,"<strong>").replace(/;st.;/g,"</strong>").replace(/;br;/g,"<br>"));
