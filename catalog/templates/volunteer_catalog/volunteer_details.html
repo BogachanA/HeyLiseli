@@ -32,7 +32,7 @@
         <div class="row justify-content-center" id="descandreq">
             <div class="col-7 col-sm-7 col-md-4 rotateback text-right" id="descContainer">
                 <h1 class="pTitle" id="descTitle">Proje Açıklaması</h1>
-                <p class="strongbreak pText" id="volDesc">{{project.description}}</p>
+                <p class="pText" id="volDesc">{{project.description | safe}}</p>
             </div>
             <div class="col-1">
                 <div class="verticalDivider" id="vd1"></div>

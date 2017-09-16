@@ -84,6 +84,7 @@ clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 50%, 50% 50%, 50% 0);
 #ownerInfoCol{
     background: url(../img/project_detail/blue_green_wave.jpeg);
     background-size: 200% 100%;
+    background-attachment: fixed;
     background-position:0% 0;
     padding-top: 40px;
     padding-bottom: 40px;
@@ -191,7 +192,29 @@ clip-path: polygon(50% 6%, 100% 0, 94% 50%, 100% 100%, 50% 94%, 0 100%, 6% 50%, 
 
 #requirementsContainer{
     background: url(../img/project_detail/purple_school_bg.jpg);
+    background-size: 100% 100%;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    color: white;
+    font-family: 'Comfortaa',sans-serif;
 }
+.reqTitle{
+    text-align: right;
+    font-size: 17px;
+}
+.reqAnswer{
+    text-align: left;
+    font-size: 14px;
+}
+.answerCol{
+    margin-bottom: 40px;
+    border-left: 2px solid white;
+}
+.check{
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
 @media(max-width:767px){
     #projectTitle{
         font-size: 50px;

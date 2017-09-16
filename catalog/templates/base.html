@@ -15,8 +15,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 
-
-
     {% compress css %}
     <link rel="stylesheet" href="{% static 'base/css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/base_css.css' %}">
@@ -58,7 +56,7 @@
                     <a href="{% url 'home' %}" ><img src="{% static 'base/img/heyliseli_logo.png' %}" id="navbarLogo"></a>
                 </div>
                 <div class="col-md-2 textLinks h-100" id="meetLink">
-                    <a href="#" id="toMeet">Etkileşime Geç</a>
+                    <a href="{% url 'proje_ana' %}" id="toMeet">Etkileşime Geç</a>
                 </div>
                 <div class="col-md-2 textLinks h-100" id="profileLink">
                     <a href="{% url 'auth_login' %}" id="toUser">

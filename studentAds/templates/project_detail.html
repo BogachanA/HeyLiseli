@@ -40,21 +40,27 @@
 </div>
 <div class="section container-fluid" id="DoubleContainer">
     <div class="row" id="nestedSectionsRow">
-        <div class="col-12 col-sm-6 infoSection" id="ownerInfoCol">
-            <div class="row justify-content-start">
-                <div class="col-5 col-md-3" id="ppCol">
-                    <img src="{{project.owner.user_image.url}}" id="userPP">
+        <div class="col-12 col-md-6 " id="requirementsContainer">
+            <div class="row justify-content-center " id="reqRow">
+                <div class="col-4 titleCol" id="allowedClassTitle">
+                    <h4 class="reqTitle" id="reqGradeTitle">Kaçıncı Sınıf Liseliler Katılabilir?</h4>
                 </div>
-                <div class="col-7 col-md-9" id="userTextCol">
-                    <h4 class="ownerTitle">Proje Sahibi: <span class="username">{{project.owner}}</span></h4>
-                    <p class="userText userSummary">{{project.owner.summary}}</p>
-                    {% if project.owner.first_name %}
-                    <p class="userText userSignature">- {{project.owner.first_name}} {{project.owner.last_name}}</p>
-                    {% endif %}
+                <div class="col-6 answerCol" id="reqGradesCol">
+                    <i class="fa fa-check-circle-o fa-2x align-middle check" aria-hidden="true"></i>
+                    <span class="reqAnswer" id="gradeAnswer"> {{project.allowed_grades}}</span>
+                </div>
+                <div class="col-4 titleCol" id="skillsTitle">
+                    <h4 class="reqTitle" id="reqSkillTitle">Aranan Nitelikler</h4>
+                </div>
+                <div class="col-6 answerCol" id="reqSkillsCol">
+                    {% for skill in project.required_skills.all %}
+                        <i class="fa fa-check-circle-o fa-2x align-middle check" aria-hidden="true"></i>
+                        <span class="reqAnswer">{{skill}}</span><br>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 infoSection" id="projectStatCol">
+        <div class="col-12 col-md-6 infoSection" id="projectStatCol">
             <h3 class="sectionTitle" id="statTitle">Proje Detayları</h3>
             <div class="row justify-content-center statRow">
                 <div class="col-6 statCol">
@@ -86,14 +92,21 @@
         </div>
     </div>
 </div>
-<div class="section container-fluid" id="requirementsContainer">
-    <div class="row justify-content-center">
-        <div class="col-3 titleCol" id="allowedClassTitle">
-            <h3 class="reqTitle" id="reqGradeTitle">Kaçıncı Sınıf Liseliler Katılabilir?</h3>
-        </div>
-        <div class="col-7 answerCol" id="reqGradesCol">
-            <i class="fa fa-check-circle-o fa-2x" aria-hidden="true"></i>
-            {{project.allowed_grades}}
+<div class="section container-fluid" id="ownerContainer">
+    <div class="row justify-content-center" id="ownerRow">
+        <div class="col-12 infoSection" id="ownerInfoCol">
+            <div class="row justify-content-center">
+                <div class="col-5 col-md-2" id="ppCol">
+                    <img src="{{project.owner.user_image.url}}" id="userPP">
+                </div>
+                <div class="col-7 col-md-6" id="userTextCol">
+                    <h4 class="ownerTitle">Proje Sahibi: <span class="username">{{project.owner}}</span></h4>
+                    <p class="userText userSummary">{{project.owner.summary}}</p>
+                    {% if project.owner.first_name %}
+                    <p class="userText userSignature">- {{project.owner.first_name}} {{project.owner.last_name}}</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -121,6 +134,8 @@
         },function(){
             $(".diamonds-pane").stop(true,false).animate({"width":$( window ).width() < 767 ? "180px":"250px"},600);
         });
+
+        $("#gradeAnswer").html($("#gradeAnswer").html().replace(/, /g,"<br><i class='fa fa-check-circle-o fa-2x align-middle check' aria-hidden='true'></i> "))
     });
 </script>
 <script type="text/javascript">
