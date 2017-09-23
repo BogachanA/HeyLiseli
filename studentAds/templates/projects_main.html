@@ -4,21 +4,25 @@
 
 {% block head %}
 <title>Liselilerin Projeleri</title>
+{% compress css %}
 <link rel="stylesheet" href="{% static 'base/css/project_main.css' %}">
+{% endcompress %}
 {% endblock %}
 
 {% block body %}
 <div class="section container-fluid" id="diamondTitleDiv">
     <div class="diamond smallDiamond" id="diamond1"></div>
     <div class="diamond" id="mainDiamond">
-        <img src="{% static 'base/img/project_main/student_collab_bg.jpg' %}" id="headBG">
+        <img src="{% static 'base/img/project_main/collab_brofist.jpg' %}" id="headBG">
     </div>
     <div class="diamond mediumDiamond" id="diamond2"></div>
     <div class="diamond largeDiamond" id="diamond3"></div>
     <div class="diamond smallDiamond" id="diamond4"></div>
+    <div class="diamond mediumDiamond" id="diamond7"></div>
     <div class="diamond smallDiamond" id="diamond5"></div>
     <div class="diamond mediumDiamond" id="diamond6">
     </div>
+    <h1 class="pageTitle">OGrencI ProjelerI</h1>
 </div>
 {% endblock %}
 
@@ -31,7 +35,10 @@
 
         $("#mainDiamond").height($("#mainDiamond").width());
 
+        $(document).scroll(function(){
+            var fromTop=$(this).scrollTop();
 
+        });
     });
 </script>
 {% endblock %}
