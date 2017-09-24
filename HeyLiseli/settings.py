@@ -12,6 +12,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -203,9 +204,13 @@ SESSION_SAVE_EVERY_REQUEST = True
 #Django Debug Toolbar
 INTERNAL_IPS = ('127.0.0.1',)
 
+#PostgreSQL database url
+DATABASES['default'] = dj_database_url.config()
+
 try:
     print("naptın")
     from local_settings import *
     print("import ettim işte öyle")
 except:
     print("localda diilsin")
+
