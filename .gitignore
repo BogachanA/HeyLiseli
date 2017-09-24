@@ -157,3 +157,7 @@ fabric.properties
 
 #media
 /media
+
+#migrations
+/catalog/migrations
+/studentAds/migrations
