@@ -28,12 +28,11 @@ def loginView(request):
             password = form.cleaned_data['password']
             user=authenticate(username=username, password=password)
 
-            if user:
-                if user.is_active:
-                    login(request,user)
-                    return HttpResponseRedirect('/')
-                else:
-                    pass
+            if user and user.is_active: # TODO look and/or rules
+                login(request,user)
+                return HttpResponseRedirect('/')
+            else:
+                pass
 
     else:
         form = loginForm()
