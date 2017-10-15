@@ -11,6 +11,38 @@
 
 
 {% block body %}
+<div id="successModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Başarılı</h4>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+            </div>
+            <div class="modal-body">
+                <i class="fa fa-check-circle fa-4x" id="successTick" aria-hidden="true"></i><br>
+                <p id="successText">Başvurun başarıyla gönderildi. {{internship.provider}} seninle yakın bir zamanda iletişime geçecek.<br>
+                Veya geçmeyecek. Şirket bu belli mi olur.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="applyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="applyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Staja Başvur</h4>
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="applyForm" action=".">
+                    {% csrf_token %}
+                    {{apply_form.as_p}}
+                    <input type="submit" id="applySubmit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="paraxify" id="mainImg"></div>
 <div class="container-fluid" id="detailContainer">
     <div class="row justify-content-center">
@@ -139,8 +171,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 detailPanel" id="similarInternships">
-
+        <div class="col-md-4 detailPanelContainer" id="applyAndSimilar">
+            <div class="detailPanel" id="applyPanel">
+                <p id="applyText">Bu iş için mi yaratıldın? Durma!</p>
+                <button id="applyModalButton" class="btn" data-toggle="modal" data-target="#applyModal">Şimdi Başvur</button>
+            </div>
         </div>
     </div>
 </div>
@@ -191,6 +226,10 @@
             $(this).find(".toggleTitles").stop(true,false).animate({height:"toggle"});
             $(this).find(".statExp").stop(true,false).animate({top:"0"});
         });
+
+        $('#applyModal').on('shown.bs.modal', function () {
+          $('#modalIntro').focus()
+        })
     });
 </script>
 {% endblock %}

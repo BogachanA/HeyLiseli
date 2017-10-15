@@ -33,7 +33,9 @@ def project_details(request,project_id):
 
 def projects_main(request):
     categories=ProjectCategory.objects.all()
+    top_projects=StudentProject.objects.order_by('-view_count')[:10]
     context={
         'categories':categories,
+        'tops':top_projects,
     }
     return render(request,'projects_main.html',context)

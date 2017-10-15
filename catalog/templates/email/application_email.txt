@@ -1,0 +1,11 @@
+Sayın {{provider}} yetkilisi,
+Yeni bir staj başvurusu aldınız:
+
+Öğrenci: {{data.name}} {{data.surname}}
+Okulu: {{data.school}}
+Sınıfı: {{data.grade}}
+İletişim Adresi: {{data.mail}}
+
+Başvuran öğrencinin mesajı: {{data.message}}
+
+-HeyLiseli ekibi

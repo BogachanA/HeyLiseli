@@ -111,3 +111,13 @@ class social_auth_complete(forms.Form):
                 new_lise, created=Lise.objects.get_or_create(name=self['newSchool'].value())
                 data=new_lise
         return data
+
+class applyToInternship(forms.Form):
+    name=forms.CharField(widget=forms.TextInput(attrs={'class':'applyInput textInput','id':'applyName','placeholder':'Adın'}),max_length=200,required=True,label='')
+    surname=forms.CharField(widget=forms.TextInput(attrs={'class':'applyInput textInput','id':'applySurname','placeholder':'Soyadın'}),max_length=200,required=True,label='')
+    school=forms.CharField(widget=forms.TextInput(attrs={'class':'applyInput textInput','id':'applySchool','placeholder':'Okulunun Adı'}),max_length=200,required=True,label='')
+    mail=forms.EmailField(widget=forms.EmailInput(attrs={'class':'applyInput textInput','id':'applyEmail','placeholder':'E-mail Adresin'}),max_length=300,required=True,label='')
+    grade=forms.CharField(widget=forms.Select(choices=Liseli.GRADE_CHOICES,attrs={'class':'applyInput selectInput','id':'applyGrade'}),label='',required=True)
+    resume=forms.FileField(widget=forms.ClearableFileInput(attrs={'class':'applyInput fileInput','id':'applyResume'}),required=True,label='')
+    message=forms.CharField(widget=forms.Textarea(attrs={'class':'applyInput textAreaInput','id':'applyMessage','placeholder':'En fazla 500 karakter lütfen. Dramatik olmaya gerek yok...'}),required=True,label='')
+

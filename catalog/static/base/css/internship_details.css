@@ -18,7 +18,7 @@
     width: 100%;
     
 }
-#intInfo{
+.detailPanel{
     width: 100%;
     height: auto;
     background-color: white;
@@ -251,8 +251,46 @@
     font-size: 25px;
 }
 
+#applyPanel{
+    padding: 25px;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    margin-top: -165px;
+}
+#applyText{
+    font-size: 17px;
+    font-weight: bold;
+    margin: 5px;
+}
+#applyModalButton{
+    width: 100%;
+    margin: 0px auto;
+    height: 60px;
+    font-size: 20px;
+    background-color: limegreen;
+    transition: all 0.4s;
+}
+#applyModalButton:hover{
+    background:darkgreen;
+    color: white;
+}
+#applyModal{
+    z-index: 9999;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+}
+.modalTitle{
+    text-align: center;
+}
 
-
+#successModal{
+    text-align: center;
+}
+#successTick{
+    margin: 15px auto;
+    
+}
 
 @media(max-width: 991px) {
     #intInfo{

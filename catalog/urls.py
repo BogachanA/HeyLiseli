@@ -4,6 +4,7 @@ from . import views
 
 
 urlpatterns = [
+    #url(r'^stajlar/staj-detay/(\d+)/success/',views.processInternshipApplication,name='int_application'),
     url(r'^stajlar/staj-detay/(\d+)/',views.internship_detail, name="detay"),
     url(r'^stajlar/:query=(\w)/',views.internships,name='stajlar_harf'),
     url(r'^stajlar/', views.internships_main, name="stajlar"),

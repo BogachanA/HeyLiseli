@@ -12,11 +12,15 @@ def home(request):
 
 def loginView(request):
     if request.user.is_authenticated:
+
+        # -Todo: redirect to profile page instead of where the user came from
         referer = request.META.get('HTTP_REFERER')
         if referer:
+            print(referer)
             return HttpResponseRedirect(referer)
         else:
             return HttpResponseRedirect("/")
+
     if request.method == "POST":
         form = loginForm(request.POST)
         if form.is_valid():

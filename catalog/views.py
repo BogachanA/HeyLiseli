@@ -1,7 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from .models import *
+from catalog.forms import applyToInternship
 from django.utils import timezone
 from django.db import IntegrityError
+from django.template.loader import render_to_string
+from catalog.helpers import find_recommended_ints
+from django.template import Context
+from django.core.mail import send_mail, EmailMultiAlternatives
 # Create your views here.
 
 def internships_main(request):
@@ -38,8 +43,17 @@ def internships(request,letter):
     return render(request, 'internship_catalog/internships_main.html',context)
 
 
-def internship_detail(request, internship_id):
+def internship_detail(request, internship_id): #TODO add recommended ints by helper functions
     internship=get_object_or_404(Internship, id=internship_id)
+    provider = internship.provider
+    if request.user.is_authenticated():
+        user=request.user
+        recommended_ints = find_recommended_ints(internship, request.user)
+        if request.method == "GET":
+            apply_form = applyToInternship({'name': user.first_name, 'surname': user.last_name, 'school': user.lise.name,'grade':user.grade,'mail':user.email})
+    else:
+        recommended_ints = find_recommended_ints(internship, user=None)
+        apply_form = applyToInternship()
 
     try:
         if request.user.is_authenticated():
@@ -61,10 +75,32 @@ def internship_detail(request, internship_id):
     current_view_count = Int_View.objects.filter(rel_int=internship).count()
     context={
         'internship':internship,
-        'view_count':current_view_count
+        'view_count':current_view_count,
+        'recommended':recommended_ints,
     }
+    user = request.user
+    if request.user.is_authenticated():
+        if request.method == "POST":
+            apply_form = applyToInternship(request.POST)
+            if apply_form.is_valid():
+                email_context = Context({
+                    'data': apply_form.cleaned_data,
+                    'provider': provider,
+                    'internship': internship,
+                })
+                subject = "Yeni bir staj başvurusu"
+                from_email = apply_form.cleaned_data['email']
+                to_email = provider.apply_email
+                text_email = render_to_string('email/application_email.txt', email_context)  # TODO TODOTODOTODOTODO
+                html_email = render_to_string('email/application_email.html', email_context)
+                msg = EmailMultiAlternatives(subject, text_email, from_email, to_email)
+                msg.attach_alternative(html_email, 'text/html')
+                msg.content_subtype = 'html'
+                msg.send()
+                context['success']=True
+                return render(request, 'internship_catalog/internship_details.html', context)
+    context['apply_form']=apply_form
     return render(request, 'internship_catalog/internship_details.html',context)
-
 
 
 def company_detail(request, company_id):

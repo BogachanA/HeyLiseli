@@ -18,6 +18,8 @@ class Lise(models.Model):
 def user_image_upload_path(instance,filename):
     return "/".join(["UserPhotos",str(instance.id),filename])
 
+def user_resume_upload_path(instance, filename):
+    return "resumes/user_{0}/{1}".format(instance.user.username,filename)
 
 class Liseli(AbstractUser):
     summary=models.TextField(max_length=300,default="Sadece benzersiz marjinal bir başka liseliyim. Yerimde duramıyorum aman allahım.")
@@ -40,6 +42,7 @@ class Liseli(AbstractUser):
     grade=models.CharField(max_length=100,choices=GRADE_CHOICES,default="Hazırlık")
     gender=models.CharField(max_length=150,choices=GENDERS,default='Choose')
     user_image=models.ImageField(upload_to=user_image_upload_path,default='categories/no-icon.png',blank=True)
+    resume=models.FileField(upload_to=user_resume_upload_path,null=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
@@ -74,9 +77,14 @@ class Provider(models.Model):
     hq_adress=models.CharField(max_length=400,default="none.com")
     establishment_date=models.CharField(max_length=40, default="Ezelden beri")
     company_field=models.CharField(max_length=100,default="Firma")
+    apply_email=models.EmailField(max_length=250,null=True)
+    contact_email=models.EmailField(max_length=250,null=True)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+
+        if self.contact_email == "" or not self.contact_email:
+            self.contact_email = self.apply_email
 
         if self.company_description == "" or not self.company_description:
             self.company_description = self.company_name

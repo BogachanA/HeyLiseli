@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% load compress %}
+{% load customFilters %}
 
 {% block head %}
 <title>Liselilerin Projeleri</title>
@@ -11,18 +12,39 @@
 
 {% block body %}
 <div class="section container-fluid" id="diamondTitleDiv">
-    <div class="diamond smallDiamond" id="diamond1"></div>
     <div class="diamond" id="mainDiamond">
         <img src="{% static 'base/img/project_main/collab_brofist.jpg' %}" id="headBG">
     </div>
-    <div class="diamond mediumDiamond" id="diamond2"></div>
-    <div class="diamond largeDiamond" id="diamond3"></div>
-    <div class="diamond smallDiamond" id="diamond4"></div>
-    <div class="diamond mediumDiamond" id="diamond7"></div>
-    <div class="diamond smallDiamond" id="diamond5"></div>
-    <div class="diamond mediumDiamond" id="diamond6">
+    <div class="forHidden">
+        <div class="diamond smallDiamond" id="diamond1"></div>
+        <div class="diamond mediumDiamond" id="diamond2"></div>
+        <div class="diamond largeDiamond" id="diamond3"></div>
+        <div class="diamond smallDiamond" id="diamond4"></div>
+        <div class="diamond mediumDiamond" id="diamond7"></div>
+        <div class="diamond smallDiamond" id="diamond5"></div>
+        <div class="diamond mediumDiamond" id="diamond6">
+        </div>
+        <h1 class="pageTitle">OGrencI ProjelerI</h1>
     </div>
-    <h1 class="pageTitle">OGrencI ProjelerI</h1>
+</div>
+<div class="section container-fluid" id="catsAndMostViewedSection">
+    <div class="division row justify-content-center" id="ropeRow">
+        <div class="col-1" id="rope1Col">
+            <img class="rope" id="rope1" src="{% static 'base/img/project_main/rope.png' %}">
+        </div>
+        <div class="placeholder col-3" id="betweenRopes"></div>
+        <div class="col-1" id="rope2Col">
+            <img class="rope" id="rope2" src="{% static 'base/img/project_main/rope.png' %}">
+        </div>
+    </div>
+    <div class="division row justify-content-center" id="categoryRow">
+        <div class="panel col-10 col-sm-9 col-md-6" id="categoryPanel">
+            <div class="panel panelMaterial" id="catPanelMaterial"></div>
+            <div class="stage">
+                <div class="ring" id="ring-2"></div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
@@ -35,10 +57,85 @@
 
         $("#mainDiamond").height($("#mainDiamond").width());
 
-        $(document).scroll(function(){
-            var fromTop=$(this).scrollTop();
+        var fromTop=0;
+        function updateDiamondPositions(){
+            let topForSmalls=+(fromTop/0.9).toFixed(2);
+            $("#diamond1").css("top",topForSmalls+220);
+            $("#diamond4").css("top",topForSmalls+160);
+            $("#diamond5").css("top",topForSmalls+360);
 
+            let topForMediums=+(fromTop/1.7).toFixed(2);
+            $("#diamond2").css("top",topForMediums+240);
+            $("#diamond7").css("top",topForMediums+125);
+            $("#diamond6").css("top",topForMediums+300);
+
+            let topForLarge=+(fromTop/4).toFixed(2);
+            $(".largeDiamond").css("top",topForLarge-20);
+        }
+
+        $(document).scroll(function(){
+            fromTop=$(this).scrollTop();
+            if (fromTop<500){
+                window.requestAnimationFrame(updateDiamondPositions);
+            }
         });
+    });
+</script>
+<script type="text/javascript" id="ringScript">
+    const POSTERS_PER_ROW = 1{{categories|len}};
+    var RING_RADIUS = 400;
+
+    function setup_posters(row) {
+        var posterAngle = 360 / POSTERS_PER_ROW;
+        for (var i = 0; i < POSTERS_PER_ROW; i++) {
+            var poster = document.createElement('div');
+            poster.className = 'poster';
+            // compute and assign the transform for this poster
+            var transform = 'rotateY(' + (posterAngle * i) + 'deg) translateZ(' + RING_RADIUS + 'px)';
+            poster.style.webkitTransform = transform;
+            // setup the number to show inside the poster
+            var content = poster.appendChild(document.createElement('p'));
+            content.textContent = i;
+            // add the poster to the row
+            row.appendChild(poster);
+        }
+    }
+
+    function init() {
+      setup_posters(document.getElementById('ring-2'));
+    }
+
+    // call init once the document is fully loaded
+    window.addEventListener('load', init, false);
+
+    function enablePosterFallBehind(){
+        $(".poster").each(function(i){
+            var rotateYDegree=$(this).css("transform");
+            var stringMatrix=rotateYDegree.split(",")[0];
+            var floatRotation=parseFloat(stringMatrix.substr(9));
+            if (floatRotation<0){
+                $(this).css("opacity","0");
+            } else {
+                $(this).css("opacity","0.7");
+            }
+        });
+    }
+
+    $(window).resize(function(){
+        var windowWidth=$(window).width();
+        if(windowWidth>992){
+            RING_RADIUS=400;
+            document.getElementById('ring-2').innerHTML="";
+            init();
+        }else if(windowWidth>767){
+            RING_RADIUS=300;
+            document.getElementById('ring-2').innerHTML="";
+            init();
+        }else if(windowWidth>575){
+            document.getElementById('ring-2').innerHTML="";
+        }
+        $(".stage").css("left",-(1280-windowWidth)/3+"px");
+        enablePosterFallBehind();
     });
 </script>
 {% endblock %}
