@@ -84,24 +84,18 @@ WSGI_APPLICATION = 'HeyLiseli.wsgi.application'  # TODO read about wsgi
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if os.getenv("ON_REMOTE", "False") == "True":
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'bogachanarslan'),
-            'USER': os.getenv('DB_USER', 'bogachanarslan'),
-            'PASSWORD': os.getenv('DB_PASS', 'liselibogi'),
-            'HOST': os.getenv('DB_HOST', '127.0.0.1'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-        }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'd3b8p59agaoe07'),
+        'USER': os.getenv('DB_USER', 'xddlztfrzawjeb'),
+        'PASSWORD': os.getenv('DB_PASS', '41707b384376a2bf26cb61f12cb255f7c993306c44d8f50d87a19d006df2903b'),
+        'HOST': os.getenv('DB_HOST', 'ec2-107-22-211-182.compute-1.amazonaws.com'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
-        }
-    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
