@@ -39,7 +39,7 @@ def loginView(request):
 
     context = {'form': form}
 
-    return render(request, 'registration/login.html', context)
+    return render(request,'registration/login.html', context)
 
 
 def social_auth_extras(request):
